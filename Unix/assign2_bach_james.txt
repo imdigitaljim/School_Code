@@ -1,0 +1,53 @@
+COP3353 ­ Fall 2014
+Assignment 2 Solution
+Due Oct 8 2014
+Name: James Bach
+Question 1 (10 points):
+­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+a. 4cc
+b. /[cC]at
+c. 6x
+d. i
+e. u
+
+
+Question 2 (10 points):
+­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+a. save changes and quit vi
+b. replace all occurences of cat to Cat
+c. find the second occurence of 'a' in the line going forward
+d. copy the current line
+e. return to the top of the file
+
+
+Question 3 (10 points):
+­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+a. ^r
+b. ^w
+c. ^e
+d. ^v
+e. ^x^s
+
+Question 4 (10 points):
+­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+a. undo the most recent command
+b. move back one character
+c. paste text at cursor
+d. exit emacs
+e. search forward
+
+
+Question 5 (10 points):
+­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­­
+a. chmod 615 file.txt 
+   chmod u=rw,g=x,o=rx file.txt
+
+b. chmod 704 file.txt 
+   chmod u=rwx,g=,o=r file.txt
+
+c. -rw------- 
+   user read and write
+
+d. drwx------ 
+   execute is required to enter directory
+   cd <mydirectoryname> would not work stating : Permission denied.

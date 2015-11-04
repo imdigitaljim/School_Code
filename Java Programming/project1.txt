@@ -1,0 +1,22 @@
+This project can be done utilizing the command line or a GUI (the GUI option will get an additional 20pts).
+
+For this project, I do encourage information sharing.  By this, if someone asks a questions, you can help them in any way so long as you don't type any code.  In other words:
+
+1.  You need to write a while loop followed by if/else statements. - OK
+2.  You need to write 1 while loop followed by 3 if/else statements. - Borderline, try to avoid.
+3.  You need to write while(x>1){}. - DON'T - Penalties will be assessed for code sharing.
+
+Also, if you find code on the web or in a book, use it.... BUT You will need to provide your source DO NOT SHARE YOUR RESOURCE WITH ANYONE!
+
+Acceptance Criteria:
+1.  FSU title bar.
+2.  The footer should include your name.
+3.  All logic must be written in Java.
+4.  Minimum requirement is the ability for 2 human players.
+5.  You can be creative.  The game does not have to be exactly like the wireframes, but it does have to be obvious that the game is Tic Tac Toe.
+6.  Extra credit will be given for going above and beyond.  For example:
+a.  Playing against the computer.
+b.  Adding AI to the computer's responses such as building in logic so that if player X has two in a row, then Player O will detect that and block.
+c.  Instead of X's and O's, give the ability to use college mascots.  X may be an image of a Seminole where O may be an image of a Gator.
+7.  Absolutely NO AUTO GENERATED CODE!  Any detection of this will result in a zero.
+  

@@ -1,0 +1,481 @@
+Programming Assignment #1
+Due: Fri, Sept 12, 11:59 PM
+Objective:  Upon completing this assignment, you should be able to implement a simple class, as well as gain a better understanding of the building and use of classes and objects.
+Task:
+An equilateral triangle is a triangle whose sides are equal. You are to write a class called Triangle, using filenames triangle.h and triangle.cpp, that will allow the creation and handling of equilateral triangles, whose sides are integers in the range 1-39.
+Details:
+1.	The single constructor for the Triangle class should have 3 parameters: an integer size (required), which is the length of a side; a border character (optional, with a default of '#'); and a fill character (optional, with a default of '*'). If the size provided is less than 1, set the size to 1. If the size provided is greater than 39, set the size to 39. The class will need to provide internal storage for any member data that must be kept track of. 
+ 
+2.	There should be member functions GetSize, Perimeter, and Area, which will return the size of a side, the perimeter of the triangle, and the area of the triangle, respectively. The first 2 should return integer results. The Area function should return its result as a double. 
+ 
+3.	There should be member functions Grow and Shrink, which will increase or decrease (respectively) the size of the triangle's sides by 1, unless this would cause the size to go out of bounds (out of the 1-39 range); in the latter case, Grow and Shrink should make no change to the size. 
+ 
+4.	There should be member functions SetBorder and SetFill, which each allow a new border or fill character (respectively) to be passed in as a parameter. There is a chart of ASCII characters in an appendix of the textbook. The characters that should be allowed for the border or fill characters are any characters from the '!' (ascii 33) up through the '~' (ascii 126). If an attempt is made to set the border or fill characters to anything outisde the allowable range, the function should set the border or fill back to its original default (the ones listed for the constructor -- the border default is '#' and the fill default is '*'). 
+ 
+5.	There should be a member function called Draw that will display a picture of the triangle on the screen. You may assume that the cursor is already at the beginning of a line when the function begins, and you should make sure that you leave the cursor on the line following the picture afterwards (i.e. print a newline after the last line of the triangle). Use the border character to draw the border of the triangle, and use the fill character to draw the internal characters. Separate the characters on a line in the picture by a single space to make the triangle look more proportional (to approximate the look of an equilateral triangle). You may not use formatting functions like setw to draw the triangle. This must be handled with loops. (You will only print out the newline, spaces, the border character, and maybe the fill character on any given line). 
+ 
+6.	Provide a member function called Summary that displays all information about a triangle: its size, perimeter, area, and a picture of what it looks like. When displaying the area (decimal data), always show exactly 2 decimal places. Your output should be in the exact same format as mine (seen in the linked sample run below) 
+ 
+7.	I am providing a sample driver program (called driver.cpp) that uses objects of type Triangle and illustrates sample usage of the member functions. You can get the driver.cpp file at this link, or you can copy it from your CS account with the unix cp command: ( cp ~myers/c++prog/hw1/driver.cpp . ).
+I have also provided the output from the sample execution of my driver.cpp program at this link.  Your class declaration and definition files must work with my main program, as-is (do not change my program to make your code work!). You are encouraged to write your own driver routines to further test the functionality of your class, as well. Most questions about the required behavior of the class can be determined by carefully examining my driver program and the sample execution. Keep in mind, this is just a sample. Your class must meet the specified requirements listed above in the specification -- not just satisfy this driver program. (For instance, I haven't tested every illegal fill character in this driver program -- I've just shown a sample). Your class will be tested with a larger set of calls than this driver program represents. 
+ 
+8.	General Requirements
+o	No global variables, other than constants!
+o	All member data of your class must be private
+o	You will need to use the <iostream> library for output.  You may use the <iomanip> library for formatting your decimal output to two places, if you wish to use the parameterized stream manipulators, but you may not use setw() or other output formatting functions for drawing the actual triangle. You may use the <cmath> library
+o	When you write source code, it should be readable and well-documented.
+?	Here are some general notes on style guidelines
+o	Your triangle.h file should contain the class declaration only.  The triangle.cpp file should contain the member function definitions.
+________________________________________
+Submitting:
+Program submissions should be done through the submission web page, linked from the main course web site. You will need your submission password -- these have been uploaded to your Grade Center view in the Blackboard page. If you have trouble accessing this, see me or your recitation instructor ASAP (or e-mail, if you can't come see me) to obtain your password. Do not send program submissions through e-mail -- e-mail attachments will not be accepted as valid submissions.
+General Advice - e-mail a copy of your finished homework files to your own FSU account. This e-mail will have a time stamp that shows when they were sent (i.e. before the due date would be the best idea) , and they will also serve as a backup. It's not a bad idea to keep a copy on your CS account (as well as on a personal computer) -- backing up your work is a GOOD thing!
+For HW #1, submit the following files
+ triangle.h
+ triangle.cpp
+Make sure your filenames are these exact names, and do not submit the driver.cpp file.
+
+
+
+Programming Assignment #2
+Due: Thurs, Sept 25
+Objective:  This assignment will provide further practice with implementing classes.
+Task:  For this homework, you will write a class called Temperature, in the files temperature.h and temperature.cpp, for creating and using objects that will store temperatures (like for weather forecasting programs).
+This class should be portable, so it should work with any up-to-date C++ compiler. Make sure that it works with g++ on linprog.cs.fsu.edu before you hand it in. You should write some test programs of your own to test the functionality of the class.
+Program Details and Requirements:
+1) An object of type Temperature should represent a temperature in terms of degrees and scale. Degrees should allow decimal precision (so use typedouble). The three scales possible are Celsius, Fahrenheit, and Kelvin. You may store the scale however you like inside the object, but for any keyboard input or function parameters, scales will come in as type char, where 'C', 'F', 'K' (as well as the lower case versions) are valid options. Your object must always represent a valid temperature -- remember that 0 Kelvin represents the lowest possible temperature in existence (the complete absence of heat). Your object should also store a format setting, to be used for display of temperatures to the screen.  There will be more than one possible format.  The class features (public interface) should work exactly as specified, regardless of what program might be using Temperature objects.
+Note: For purposes of conversions between scales, please remember the following conversion relationships betweeen temperatures:
+•	Celsius = (Fahrenheit - 32) X (5/9)
+•	(or) Fahrenheit = (Celsius X 9/5) + 32
+•	Celsius = Kelvin - 273.15
+2) Your Temperature class must provide the following services (i.e. member functions) in its public section.  These functions will make up the interface of the Temperature class.  Make sure you use function prototypes as specified here.  (You may write any other private functions you feel necessary, but the public interface must include all the functionality described here).
+•	the constructor(s): 
+The Temperature class should have a constructor that allows the user to specify the values for the degrees and scale, using types double and char, respectively. If any of the values would result in an invalid temperature, the constructor should throw out the erroneous information and initialize the object to represent 0 Celsius, by default. Also, you should allow a Temperature object to be declared without specified parameter values, in which case it should initialize to 0 Celsius (the default).
+Examples:  These declarations should be legal, and the comment gives the initialized temperature
+ Temperature t1;             // initializes to 0 Celsius 
+ Temperature t2(23.5, 'F');  // initializes to 23.5 Fahrenheit 
+ Temperature t3(12.6, 'Z');  // invalid scale, initializes to 0 Celsius
+ Temperature t4(-300, 'c');  // this is below 0 Kelvin, inits to 0 Celsius
+ Temperature t5(15, 'k');    // initializes to 15 Kelvin
+•	void Input() 
+This function should prompt the user to enter a temperature, and then allow the user to input a temperature from the keyboard.  User input is expected to be in the format degrees scale, where degrees allows values with decimal precision, and scale is entered as a character. Whenever the user attempts to enter an invalid temperature, the Input function should display an appropriate error message (like "Invalid temperature.  Try again: ") and make the user re-enter the whole temperature.  A few examples of some good and bad inputs:
+•	 Legal:    43.6 k , 53.5 C , 100 F , -273.15 c
+•	 Illegal:  12.3 q , -5 K , -278 C , -500 F       // last 3 are below absolute zero
+You may assume that the user entry will always be of the form: 
+ D S  where D is a numeric value and S is a character
+•	void Show() 
+This function should simply output the temperature to the screen.  There will be more than one possible format for this output, however, and your class will need to store a format setting. The Show function should use the format setting to determine the output.  (There will be a member function that allows the setting to be changed).  When a Temperature object is created, the format setting should start out at the "Default" setting. The possible formats are shown in the following table: 
+ 
+Name	Format	Example	Explanation
+Default	D S	50.4316 C	This will look mostly like the input from the Input function. 
+Print the degrees and scale as double and char, with default precision on the degrees, and the scale as an uppercase letter
+Precision-1	D.d S	50.4 C	Degrees printed to 1 place after the decimal, fixed format, and scale printed as an uppercase letter. This output will need to make sure to put the output stream BACK to its original format settings when you are done, (so that output from a main program isn't now set to 1 decimal place for the caller, for example). See this notes addendum for more details on this kind of thing
+Long	D scale	50.1436 Celsius	This display format should show the degrees in default precision, and the scale as the full word "Celsius", "Fahrenheit", or "Kelvin"
+•	
+ 
+•	bool Set(double deg, char s) 
+This function should set the temperature to the specified values (the first parameter represents the degrees, the second represents the scale   If the resulting temperature is an invalid temperature, the operation should abort (i.e. the existing stored temperature should not be changed).  This function should return true for success and false for failure (i.e. invalid temperature sent in).
+•	double GetDegrees() 
+char GetScale() 
+These are "accessor" functions, and they should return the degrees and scale to the caller, respectively.
+•	bool SetFormat(char f) 
+This function allows the caller to change the format setting.  The setting should be adjusted inside the object based on the character code passed in.  This means that future uses of the Show function will display in this given format until the format is changed.  The valid setting codes that can be passed in are:
+•	 'D' = Default format 
+•	 'P' = Precision-1 format 
+•	 'L' = Long format 
+If an invalid setting code is passed in, do not alter the current format setting.  This function should return true for successful format change, andfalse for failure (invalid setting given).
+•	bool Convert(char sc) 
+This function should convert the current temperature (i.e. the calling object) so that it is now represented in the new scale given in the parameter. You'll need to use the temperature conversion factors for this. If the scale provided is invalid, abort the operation and do not change the current temperature. Otherwise, convert the temperature to the new scale, so that it is equivalent to the previous representation. Return true for success, false for failure (i.e. invalid scale). Examples:
+•	  Temperature t1(68.9, 'F');		// 68.9 Fahrenheit  
+•	
+•	  t1.Convert('T');		// invalid scale, no change.  Returns false
+•	  t1.Convert('c');		// t1 is now 20.5 Celsius
+•	  t1.Convert('K');		// t1 is now 293.65 Kelvin
+•	int Compare(const Temperature& d) 
+This function should compare two Temperature objects (the calling object and the parameter), and should return: -1 if the calling object is the lower temperature, 0 if the objects represent the same temperature, and 1 if the parameter object is the lower temperature. The function should not change either object. Example:
+•	  Temperature t1(0, 'C');		// 0 Celsius
+•	  Temperature t2(31.5, 'F');		// 31.5 Fahrenheit
+•	
+•	  t1.Compare(t2);		// returns 1  (since t2 comes first)
+•	  t2.Compare(t1);		// returns -1 (calling object is t2, comes first)
+
+3) General Requirements:
+•	all member data of the Temperature class must be private.
+•	The const qualifier should be used on any member functions where it is appropriate
+•	the only libraries that may be used in these class files are <iostream>, <iomanip>, <cctype>, and <string>. Note that you may use the string class to store the words like "Celsius", etc. Although this class can easily be written without using class string
+•	You only need to do error-checking that is specified in the descriptions above.  If something is not specified (e.g. user entering a letter where a number is expected), you may assume that part of the input will be appropriate. You must always maintain a valid temperature object (in all your functions), but for keyboard input, you may assume that if you ask for a double, you will get a number (not words), for example.
+•	user input and/or screen output should only be done where described (i.e. do not add in extraneous input/output).
+•	no global variables, other than constants
+Extra Credit: 
+Add the following member function to your class:
+void Increment(int deg, char sc) 
+This function should move the temperature forward by the number of degrees given IN the scale given. However, the resulting object should remain in the original scale representation. 
+Examples:
+  Temperature t1(20.5, 'C');		// 20.5 Celsius
+
+  t1.Increment(3, 'C');		// add 3 degrees Celsius to the current 
+				//   temperature. t1 is still in celsius.
+  t1.Increment(6, 'F');		// add 6 degrees Fahrenheit to the 
+				//   current temperature.  t1 is still 
+      				//   represented in Celsius.
+________________________________________
+Testing Your Class:
+You will need to test your class, which means you will need to write one or more main programs that will call upon the functionality (i.e. the public member functions) of the class and exercise all of the different cases for each function.  You do not need to turn any test programs in, but you should write them to verify your class' features.  Here is the beginning of a sample test program to get you started.  Note - this one does not exercise every possible test case -- it is your job to test your class thoroughly. 
+ 
+Submitting:
+Submit the following files (using the usual web submission procedure): 
+  temperature.h 
+  temperature.cpp 
+Programming Assignment #3
+Due: Tues, Oct 7
+Objective
+To gain experience with basic operator overloading.
+Task
+Your task will be to create a class called Distance, in the files "distance.h" and "distance.cpp", which will involve a variety of operator overloads. A Distance object will store a quantity of distance, in terms of miles, yards, feet, and inches. You will overload some basic operators for use with these objects, including arithmetic, comparison, and insertion/extraction (I/O) operators.
+Details and Requirements:
+1.	The Distance class must allow for storage of a non-negative quantity of distance, in terms of miles, yards, feet, and inches, using integer precision. All values should be non-negative. The data should always be maintained in a simplified form. Example: if you have 14 inches, this should be expressed as 1 foot, 2 inches. Remember that there are 12 inches in a foot, 3 feet in a yard, and 1760 yards in a mile. There is no limit on the number of miles. You should create appropriate member data in your class. All member data must be private. 
+ 
+2.	Constructors
+o	The class should have a default constructor (no parameters), which should initialize the object so that it represents the distance 0.
+o	The class should also have a constructor with a single integer parameter, which represents a quantity of inches -- this should be translated into the appropriate notation for a Distance object. Note that this constructor with a single parameter will be a "conversion constructor" that allows automatic type conversions from "int" to "Distance". If the parameter is negative, default the Distance object to represent 0.
+o	The class should also have a constructor that takes 4 parameters, representing the miles, yards, feet, and inches to use for initializing the object. If any of the provided values are negative, default the Distance object to represent 0. If any of the provided values are too high (but all non-negative), simplify the object to the appropriate representation
+Examples:
+ Distance t;	// this creates an object which is 0 miles, 0 yards, 0 feet, 0 inches
+ Distance s(1234);  // this creates an object representing 0 miles, 34 yards, 0 feet, 10 inches
+ Distance r(-123);  // creates an object representing 0 miles, 0 yards, 0 feet, 0 inches
+ Distance d(1234567);  // creates an object representing 19 miles, 853 yards, 1 feet, 7 inches
+
+ t = 4321;      // conversion constructor allows this assignment.
+	        // t now stores 0 miles, 120 yards, 0 feet, 1 inch
+
+ Distance x(1, 3, 2, 7);	 // 1 mile, 3 yards, 2 feet, 7 inches
+ Distance y(2, -4, 6, 8);	 // creates object representing 0, since -4 yards not legal
+ Distance z(3, 5, 7, 9);	 // 3 miles, 7 yards, 1 feet, 9 inches (simplified)
+3.	Create an overload of the insertion operator << for output of Distance objects. A distance object should be printed in the format: (MILESm YARDSy FEET' INCHES") -- where MILES is the number of miles, YARDS is number of yards, FEET is number of feet, and INCHES is number of inches. Note that the characters 'm' and 'y' should appear after the first two values, respectively, and the markers ' and " are the standard notations for feet and inches. The whole output should be inside a set of parintheses (). Also, for the first three values, ONLY print them if they are non-zero. Always print inches. Examples:
+o	(2m 13y 2' 9") means 2 miles, 13 yards, 2 feet, 9 inches
+o	(89m 175y 4") means 89 miles, 175 yards, 0 feet, 4 inches
+o	(2' 10") means 0 miles, 0 yards, 2 feet, 10 inches
+o	(0") means a distance of 0
+
+4.	Create an overload of the extraction operator >> for reading Distance objects from an input stream.  The format for the input of a Distance object is MILES,YARDS,FEET,INCHES, where the user is to type the values as a comma-separated list. You may assume that keyboard input will always be entered in this format (4 integers separated by commas). This operator will need to do some error checking, as well.  If any of the input values are negative, this is an illegal Distance quantity, and the entire object should default to the value 0 (0 miles, yards, feet, inches).  If any of the values are over the allowable limit (i.e. not in simplified form), then this function should adjust the Distance object so that it is in simplified form.  Example:  If the input is 0,0,4,13, then it should be simplified to 1 yard, 2 feet, 1 inch, because that is equivalent to 4 feet and 13 inches. Examples of input format:
+5.	  13,5,2,8		// input translates to (13m 5y 2' 8")
+6.	  0,0,4,13		// input translates to (1y 2' 1")
+7.	Create overloads for the + operator and the - operator to allow addition and subtraction of two quantities of distance.  Results should always be returned in the simplified form.  For subtraction, if the first quantity of distance is less than the second (which would normally result in a negative quantity), return the Distance object (0") instead. Examples:
+o	(3m 7y 1' 9") + (2m 6y 8") = (5m 13y 2' 5")
+o	(3m 7y 1' 9") - (2m 6y 8") = (1m 1y 1' 1")
+o	(1m 6y 9") + (2m 5y 2' 7") = (3m 12y 4")
+o	(1m 6y 9") - (2m 5y 2' 7") = (0")
+
+8.	Create an overload for the * operator, to allow a Distance object to be multiplied with an integer multiplier. The result, as usual, should be expressed in simplified format. Examples:
+9.	  Distance d1(1,500,2,5);   // (1m 500y 2' 5")
+10.	
+11.	  cout << d1 * 3;	  // d1 * 3 yields:  (3m 1502y 1' 3")
+12.	  cout << d1 * 5;	  // d1 * 5 yields:  (6m 744y 1")
+13.	Create overloads for all 6 of the comparison operators ( < , > , <= , >= , == , != ).  Each of these operations should test two objects of type Distance and return true or false. You are testing the Distance objects for order and/or equality based on whether one quantity of distance is more than (less than, equal to, etc) another. 
+ 
+14.	Create overloads for the increment and decrement operators (++ and --). You need to handle both the pre- and post- forms (pre-increment, post-increment, pre-decrement, post-decrement). These operators should have their usual meaning -- increment will add 1 inch to the Distance value, decrement will subtract 1 inch. If the distance object is already at 0, then decrement doesn't change it (i.e. you still never will have a negative distance value). Examples:
+15.	  // suppose d1 is (2m 10y 2' 10")
+16.	  // suppose d2 is (5m 51y 1' 1")
+17.	  cout << d1++;            //  prints (2m 10y 2' 10"), d1 is now (2m 10y 2' 11")
+18.	  cout << ++d1;            //  prints (2m 11y 0"), d1 is now (2m 11y 0")
+19.	  cout << d2--;            //  prints (5m 51y 1' 1"), d2 is now (5m 51y 1' 0")
+20.	  cout << --d2;            //  prints (5m 51y 11"), d2 is now (5m 51y 11")
+General Requirements
+•	As usual, no global variables
+•	All member data of the Distance class must be private
+•	Use the const qualifier whenever appropriate
+•	The only library that may be used in the class files is iostream
+•	Since the only output involved with your class will be in the << overload (and commands to invoke it will come from some main program or other module), your output should match mine exactly when running test programs.
+Sample Test Program
+You are encouraged to create your own test program(s), but the following is a main program to get you started. This does not give a comprehensive set of tests, but it should give you an idea of the types of calls that can be made. Sample main program
+________________________________________
+Submit the following files using the normal web submission site:
+  distance.h
+  distance.cpp
+
+
+Programming Assignment #4
+Due: Mon, Oct 27
+Objective
+Upon completion of this program, you should gain experience in working with dynamic arrays of objects, as well as working with two classes in a "has-a" relationship. This will also give some extra practice with array and c-string usage.
+ABET/SMALCS Assessment
+This assignment is designated as one of the course assignments being used to assess basic programming skills for ABET/SMALCs requirements. Please see the syllabus for details. Note that in addition to the normal grading scales, each student's submission will be judged in several aspects on a scale of "Highly Effective", "Effective", or "Ineffective", as specified by ABET/SMALCS outcome assessment procedures. A student's submission that earns 70% of the available points will count as an overall score of "Effective".
+Task
+You will be writing classes that implement a simulation of a playlist for a digital music device.  The list will be a dynamic array of Song objects, each of which stores several pieces of information about a song.  You will need to finish the writing of two classes:  Song and Playlist.  The full header file for the Song class has been provided in a file called song.h.  You can get a copy of it here.
+Program Details and Requirements
+1) Using the Song class declaration, write the song.cpp file and define all of the member functions that are declared in the file song.h.   (Do not changesong.h in any way.  Just take the existing class interface and fill in the function definitions).  Notice that there are only six categories of songs in this class:  POP, ROCK, ALTERNATIVE, COUNTRY, HIPHOP, and PARODY.  The expected functions behaviors are described in the comments of this header file. 
+ 
+2) Write a class called Playlist (filenames are playlist.h and playlist.cpp).  A Playlist object should contain a list of songs. There is no size limit to the song list, so it should be implemented with a dynamically allocated array.  (This means you'll need an array of Song objects).  You can add any public or private functions into the Playlist class that you feel are helpful.  In addition to the Playlist class itself, you will also create a menu program to manage the playlist. Note that the Playlist class should provide most of the functionality -- as the idea is to build a versatile and reusable class. The menu program you write is just for testing purposes, so the major functionality will be in the Playlist class itself. The Playlist member functions will be the interface betwen this menu program and the internally stored data (the list of songs).
+Rules for the Playlist class:
+•	All member data of class Playlist must be private
+•	There should be no cin statements inside the Playlist class member functions.  To ensure the class is more versatile, any user input (i.e. keyboard) described in the menu program below should be done in the menu program itself.  Design the Playlist class interface so that any items of information from outside the class are received through parameters of the public member functions.
+•	The list of Songs must be implemented with a dynamically allocated array. Between calls to Playlist member functions, there should never be more than 5 unused slots in this array (i.e. the number of allocated spaces may be at most 5 larger than the number of slots that are actually filled with real data). This means that you will need to ensure that the array allocation expands or shrinks at appropriate times.  Whenever the array is resized, print a message (for testing purposes) that states that the array is being resized, and what the new size is. Example:  "** Array being resized to 10 allocated slots".
+•	Since dynamic allocation is being used inside the Playlist class, an appropriate destructor must be defined, to clean up memory. The class must not allow any memory leaks
+•	You must use the const qualifier in all appropriate places (const member functions, const parameters, const returns, where appropriate).
+3) Write a main program (filename menu.cpp) that creates a single Playlist object and then implements a menu interface to allow interaction with the object. Your main program should implement the following menu loop (any single letter options should work on both lower and upper case inputs):
+  A:   Add a song to the playlist 
+  F:   Find a song on the playlist 
+  D:   Delete a song from the playlist
+  S:   Show the entire playlist
+  C:   Category summary 
+  Z:   Show playlist size
+  M:   Show this Menu 
+  X:   eXit the program 
+Behavior of menu selections:
+Always ask for user input in the order specified.  Remember, all user inputs described in the menu options below should be done by the menu program (not inside the Playlist class). Such input can then be sent into the Playlist class -- the Playlist class member functions should do most of the actual work, since they will have access to the list of songs. For all user inputs (keyboard), assume the following:
+•	a song title and artist will always be input as c-strings (c-style strings), of maximum lengths 35 and 20, respectively.  You may assume that the user will not enter more characters than the stated limits for these inputs.
+•	when asking for the category, user entry should always be a single character.  The correct values are P, R, A, C, H, and Y - for Pop, Rock, Alternative, Country, HipHop, and Parody, respectively.   Uppercase and lowercase inputs should both be accepted.  Whenever the user enters any other character for the category, this is an error -- print an error message and prompt the user to enter the data again (Example error message: "Invalid category.  Please re-enter: ").
+•	user input of the size should be a positive int, in kilobytes.  You may assume that the user will enter an integer.  Whenever the user enters a number that is not positive, it is considered an error -- so an error message should be printed and the user should be prompted to re-enter the size.  (Example: "Must enter a positive size.  Please re-enter: ").
+•	User input of menu options are letters, and both upper and lower case entries should be allowed.
+A: This menu option should allow the adding of a song to the playlist. The user will need to type in the song's information. Prompt and allow the user to enter the information in the following order:   title, artist, category, size.  The information should be sent into the Playlist object and stored in the list of songs.
+F: This option should allow the user to search for a song in the playlist by title or by artist. When this option is selected, ask the user to enter a search string (may assume user entry will be a string 35 characters or less). If the search string matches a song title, display the information for that song (output format is described in the Display function of the Song class). If the search string matches an artist/group in the list, display the information for all songs by that artist. If no matching songs are found in the search , display an appropriate message informing the user that there were no results in the playlist.
+D: This option should delete a song from the playlist. When this option is selected, ask the user to type in the title of the song (you may assume that song titles in the list will be unique). Remove this song from the playlist. If there is no such title, inform the user and return to the menu.
+S: This option should simply print the entire playlist to the screen, one line per song, in an organized manner (like a table). Each line should contain one song's information, as described in the song.h file. Also, display the total number of songs in the playlist, as well as the total size of the playlist (in Megabytes, to 2 decimal places).
+C: This option should list the playlist contents for one specific category. When this option is selected, ask the user to input a category to print. For the category selected, print out the contents of the playlist, as in the Show option, but for the songs matching the selected category only. (e.g. list all of the Pop songs). After this, also display the total quantity, as well as the total file size (the sum of the sizes), taken up by songs in this category. Print this size in Megabytes to 2 decimal places.
+Z: This option should compute and print the total file storage taken up by the playlist, printed out in kilobytes.
+M:  Re-display the menu. 
+X:  Exit the menu program. 
+ 
+5) General Requirements:
+•	All class member data must be private
+•	ALL string usages in this assignment are to be implemented with C-style strings (i.e. null-terminated character arrays). You may NOT use the C++ string class library. A large point of this assignment is to do your own dynamic memory allocation and management, as well as to practice with fixed size C-strings
+•	An invalid menu selection should produce an appropriate output message to the user, like "Not a valid option, choose again."
+•	For all of these options, any output to the screen should be user-friendly. By this, assume that the user of the program has never seen it before. All output should clearly indicate what information is being presented, and the user should always be told what is expected in terms of input.
+•	Adhere to the good programming practices discussed in class. (No global variables, other than constants or enumerations. Use const in all appropriate places. Don't #include .cpp files. Document your code. etc).
+•	You may use the following libraries: iostream, iomanip, cstring, cctype
+Extra Credit:
+Write a function called "Sort", and add in a menu option (using the letter 'O') for sorting the playlist. When this menu option is chosen, ask the user whether they want to sort by artist or title (enter 'A' or 'T', allowing upper or lower case). Then, sort the playlist by ascending alphabetic (or actually, lexicographic) order, on the appropriate field (author or title). 
+________________________________________
+Submit the following files through the web page in the usual manner:
+  song.cpp 
+  playlist.h 
+  playlist.cpp 
+  menu.cpp 
+You can run my version of the menu executable from linprog.cs.fsu.edu with the command:
+  ~myers/copprog/menu4
+
+COP 3330 - Programming Assignment #5
+Due: Mon, Nov 10
+Objective
+Upon completion of this program, you should gain further experience with operator overloading, as well as experience with managing dynamic memory allocation inside a class.
+The code for this assignment should be portable -- make sure you test with g++ on linprog.cs.fsu.edu before you submit.
+ 
+Task
+One common limitation of programming languages is that the built-in types are limited to smaller finite ranges of storage. For instance, the built-in inttype in C++ is 4 bytes in most systems today, allowing for about 4 billion different numbers. The regular int splits this range between positive and negative numbers, but even an unsigned int (assuming 4 bytes) is limited to the range 0 through 4,294,967,295.  Heavy scientific computing applications often have the need for computing with larger numbers than the capacity of the normal integer types provided by the system. In C++, the largest integer type is long, but this still has an upper limit.
+Your task will be to create a class, called MyInt, which will allow storage of any non-negative integer (theoretically without an upper limit -- although there naturally is an eventual limit to storage in a program). You will also provide some operator overloads, so that objects of type MyInt will act like regular integers, to some extent (To make them act completely like regular integers, it would take overloading most of the operators available, which we will not do here). There are many ways to go about creating such a class, but all will require dynamic allocation (since variables of this type should not have a limit on their capacity).
+The class, along with the required operator overloads, should be written in the files "myint.h" and "myint.cpp". I have provided starter versions of these files, along with some of the declarations you will need. You will need to add in others, and define all of the necessary functions. You can get a copy of the starter files here: myint.h and myint.cpp. I have also provided a sample main program to assist in testing, along with a link to some sample test runs from my version of the class. The sample main program is linked at the bottom of this specification. Details and Requirements are listed below, followed by some hints and tips on some of the items.
+Details and Requirements
+1) Your class must allow for storage of non-negative integers of any (theoretical) size. While not the most efficient in terms of storage, the easiest method is to use a dynamic array, in which each array slot is one decimal "digit" of the number. (This is the suggested technique). You may go ahead and assume that the number of digits will be bound by the values allowed in an unsigned int varible (it would be a good idea to keep track of the number of digits in such a variable). You should create appropriate member data in your class. All member data must be private.
+2)  There should be a constructor that expects a regular int parameter, with a default value of 0 (so that it also acts as a default constructor).  If a negative parameter is provided, set the object to represent the value 0.  Otherwise, set the object to represent the value provided in the parameter.  There should be a second constructor that expects a C-style string (null-terminated array of type char) as a parameter. If the string provided is empty or contains any characters other than digits ('0' through '9'), set the object to represent the value 0. Otherwise, set the object to represent the value of the number given in the string (which might be longer than a normal int could hold).
+Note that the two constructors described above will act as "conversion constructors" (as discussed previously in lecture class). Recall that such constructors will allow automatic type conversions to take place -- in this case, conversions from int to MyInt and from c-style strings to type MyInt -- when appropriate. This makes our operator overloads more versatile, as well. For example, the conversion constructor allows the following statements to work (assuming appropriate definitions of the assignment operator and + overloads described later):
+ MyInt x = 1234; 
+ MyInt y = "12345"; 
+ MyInt z = x + 12; 
+3)  Since dynamic allocation is necessary, you will need to write appropriate definitions of the special functions (the "automatics"):  destructor, copy constructor, assignment operator.  The destructor should clean up any dynamic memory when a MyInt object is deallocated.  The copy constructor and assignment operator should both be defined to make a "deep copy" of the object (copying all dynamic data, in addition to regular member data), using appropriate techniques.  Make sure that none of these functions will ever allow memory "leaks" in a program.
+4)  If you use a dynamic array, you will need to allow for resizing the array when needed. There should never be more than 5 unused array slots left in the array at the end of any public operation. 
+ 
+Operator overloads:  (The primary functionality will be provided by the following operator overloads).
+5)  Create an overload of the insertion operator << for output of numbers.  This should print the number in the regular decimal (base 10) format -- and no extra formatting (no newlines, spaces, etc -- just the number).
+6)  Create an overload of the extraction operator >> for reading integers from an input stream. This operator should ignore any leading white space before the number, then read consecutive digits until a non-digit is encountered (this is the same way that >> for a normal int works, so we want to make ours work the same way).  This operator should only extract and store the digits in the object.  The "first non-digit" encountered after the number may be part of the next input, so should not be extracted. You may assume that the first non-whitespace character in the input will be a digit. i.e. you do not have to error check for entry of an inappropriate type (like a letter) when you have asked for a number.
+Example:  Suppose the following code is executed, and the input typed is "  12345   7894H".
+  MyInt x, y; 
+  char ch; 
+  cin >> x >> y >> ch; 
+The value of x should now be 12345, the value of y should be 7894 and the value of ch should be 'H'.
+7)  Create overloads for all 6 of the comparison operators ( < , > , <= , >= , == , != ).  Each of these operations should test two objects of type MyInt and return an indication of true or false. You are testing the MyInt numbers for order and/or equality based on the usual meaning of order and equality for integer numbers.
+8)  Create an overload version of the + operator to add two MyInt objects.  The meaning of + is the usual meaning of addition on integers, and the function should return a single MyInt object representing the sum.
+9)  Create an overload version of the * operator to multiply two MyInt objects.  The meaning of * is the usual meaning of multiplication on integers, and the function should return a single MyInt object representing the product. The function needs to work in a reasonable amount of time, even for large numbers. (So multiplying x * y by adding x to itself y times will take way too long for large numbers -- this will not be efficient enough).
+10) Create the overloads of the pre-increment and post-increment operators (++). These operators should work just like they do with integers. Remember that the pre-increment operator returns a reference to the newly incremented object, but the post-increment operator returns a copy of the original value (before the increment).
+11) General Requirements:
+•	As usual, no global variables, other than constants
+•	All member data should be private
+•	Use appropriate good programming practices as denoted on previous assignments
+•	Since the only output involved with your class will be in the << overload, your output must match mine exactly when running test programs.
+•	You may NOT use classes from the STL (Standard Template Library) -- this includes class <string> -- as the whole point of this assignment is for you to learn how to manage dynamic memory issues inside of a class yourself, not rely on STL classes to do it for you. You may use standard I/O libraries like iostream and iomanip, as well as the common C libraries, like cstring and cctype
+Extra Credit:
+A) Create an overloaded version of the - operator to subtract two MyInt objects.  The meaning of - is the usual meaning of subtraction on integers, with one exception.  Since MyInt does not store negative numbers, any attempt to subtract a larger number from a smaller one should result in the answer 0.  The function should return a single MyInt object representing the difference.
+B) Create an overloaded / operator and a % operator for division of two MyInt objects.  The usual meaning of integer division should apply (i.e. / gives the quotient and % gives the remainder).  Both functions should return their result in a MyInt object.
+Note: The extra credit operations also must run in a reasonable amount of time. Long lags of multiple seconds on large values are not acceptable. Hint -- for arithmetic operations, think back to the algorithms you learned when you did math by hand in grade school.
+________________________________________
+Hints and Tips:
+1)  Storage:  The suggested storage mentioned above is a dynamic array, in which each array slot represents one digit of the number.  There are multiple ways to manage this.  One method would be to use an array of integers, another would be an array of characters.  Both have advantages and disadvantages.  An integer array would be easier for arithmetic calculations, but a character array would be easier for input purposes.  You may choose your preference, but remember that an integer digit, like 6, and it's corresponding character representation, '6', are not stored as the same value!  '6' is stored with its corresponding character code (usually ASCII).
+In case you want to use them (not required), I have provided two functions for converting easily between single digit integers and their corresponding character codes.  (These functions are only for use with single digits).  You may use them if you like, as long as you cite the source in your comments.  These are stand-alone functions (not members of any class).  Copies of these functions are already placed in your starter "myint.cpp" file.
+int C2I(char c) 
+// converts character into integer (returns -1 for error) 
+{ 
+   if (c < '0' || c > '9')      return -1;      // error 
+   return (c - '0');                            // success 
+} 
+
+char I2C(int x) 
+// converts single digit integer into character (returns '\0' 
+for error) 
+{ 
+   if (x < 0 || x > 9)          return '\0';    // error 
+   return (static_cast<char>(x) + '0');         // success 
+} 
+6) Input:  For the >> operator overload, there are some issues to be careful about.  You will not be able to just use the normal version of >> for integers, because it attempts to read consecutive digits, until a non-digit is encountered.  The problem here is that we will be entering numbers that go beyond the capacity of a normal int (like 6 trillion).  So, you will probably find it necessary to read one digit at a time (which means one byte, or character, at a time).  Because of this, you may find the above conversion functions useful.
+You already know of some istream member functions (like getline), and you have used many versions of the >> operator on basic types.  One thing worth keeping in mind is that when the >> operator is used for built-in types, any leading white space is automatically ignored.  However, there are a couple of other istream functions you might find useful, including the ones with prototyes:
+  int get(); 
+  int peek(); 
+The get() function extracts and returns the next single character on the stream, even if it is a white space character, like the newline.  This function doesnot skip white space (or any other characters), like the built-in >> functions do.  The peek() function just looks at and returns the next character on the stream, but it does not extract it.  This function is good for seeing what the next character is (i.e. like whether it is a number or not), without actually picking it up.
+7) Comparison Overloads:  Writing all 6 comparison overloads may sound like a big task, but it really isn't.  Always remember that once a function is written, other functions can call it.  For example, once you have written the details of comparing two numbers with the less-than operator, it should be very easy to define the > operator (by calling upon the < operator to do the work).  You can't write them ALL this way, because you don't want to get stuck in an infinite loop (i.e. don't make both < and > call each other -- you'll never get out!)  But, you can certainly make the job easier by defining some of these in terms of others that are already written.
+8) Addition operator:  This is a more difficult function than it sounds like, in the MyInt class.  However, the algorithm should be conceptually easy -- it can follow exactly the way you learned to add back in grade school!  You'll probably find it most helpful to break this algorithm down to the grade school step-by-step level, performing an addition digit by digit.  And don't forget that some additions can cause a carry!
+9) Multiplication operator:  This one will be a little more complex than the addition overload, but again, you should think back to the algorithm you learned for multiplying numbers in grade school.  The same algorithm can be applied here.  Again, don't forget the carries!
+________________________________________
+
+Sample main program:
+The sample main program that is provided can be found here: main.cpp
+A couple of sample test runs can be viewed here:
+•	Sample run 1
+•	Sample run 2
+________________________________________
+
+Submit the following files (using the usual web submission procedure): 
+  myint.h 
+  myint.cpp
+COP 3330 - Programming Assignment #6
+Due: Fri, Nov 21
+Objective
+To gain experience with base and derived classes, virtual functions, and using applications of polymorphism. Also, to gain further practice with file I/O.
+ABET/SMALCS Assessment
+This assignment is designated as one of the two course assignments being used to assess basic programming skills for ABET/SMALCs requirements. Please see the syllabus for details. Note that in addition to the normal grading scales, each student's submission will be judged in several aspects on a scale of "Highly Effective", "Effective", or "Ineffective", as specified by ABET/SMALCS outcome assessment procedures. A student's submission that earns 70% of the available points will count as an overall score of "Effective".
+Task
+You will design a set of classes for storing student information, along with a main program that will read student information from a file, store the data, compute final grades, and then print a summary report to an output file. 
+ 
+________________________________________
+Details
+1.	Design a set of classes that store student grade information. There should be one base class to store common data, and three derived classes that divide the set of students into three categories: Biology students, Theater students, and Computer Science students. All data stored in these classes should be private or protected. Any access to class data from outside should be done through public member functions. The base class should allocate storage for the following data (and only this data):
+o	student's first name (you may assume 20 characters or less)
+o	student's last name (you may assume 20 characters or less)
+o	Which course the student is in (Biology, Theater, or Computer Science)
+ 
+2.	Each class must have a function that will compute and return the student's final average, based on the stored grades. All grades are based on a 100 point scale. Here are the grades that need storing for each subject, along with the breakdown for computing each final grade:
+Biology -- Lab Grade = 30%, Three term tests = 15 % each, Final Exam = 25%
+Theater -- Participation (scene studies) = 40 %, Midterm = 25%, Final Exam = 35%
+Computer Science -- There are 6 programming assignments, to be averaged into one Program Average (which can be a decimal number). Final grade computed as follows: 
+* Program Average = 30%, Test 1 = 20%, Test 2 = 20%, Final Exam = 30% 
+ 
+3.	Write a main program (in a separate file) that does the following (in this order):
+a) Ask the user for input and output file names. This is the only input and output that should be done from keyboard and to the screen. All other input and output will be to and from files. (See the sample run below).
+b) Read the student data from the input file and store it using an array of appropriate type. You should use just one array for all students, not a separate array for each subject (i.e. this will be a heterogeneous list).  You will need to allocate this list dynamically, since the size is stored in the input file.  (Note that this also means each list item will need to be created dynamically).  Each student's data should be stored in a separate object. (Any dynamically allocated space should be cleaned up appropriately with delete when you are finished with it).
+Hint: Remember that a heterogeneous list is implemented using an array of pointers to the base class type. And as stated above, this must be created dynamically in this situation. i.e. you will need to use the new operator. If you declare your array like this: 
+    Student* list[size]; 
+then it is WRONG.
+c) Print a summary report to the output file, as specified below.  You'll need to use the function that computes the final average when you do this, since the final averages will be included in this summary report. 
+ 
+4.	File formats
+Input File -- The first line of the input file will contain the number of students listed in the file. This will tell you how big a list you need.  After the first lines, every set of two lines constitutes a student entry. The first line of a student entry is the name, in the format lastName, firstName. Note that a name could include spaces -- the comma will delineate last name from first name. The second line will contain the subject ("Biology", "Theater", or "Computer Science"), followed by a list of grades (all integers), all separated by spaces. The order of the grades for each class type is as follows:
+Biology -- Lab Grade, three term tests, Final Exam 
+Theater -- Participation, Midterm, Final Exam 
+Computer Science -- six Program grades, Test 1, Test 2, Final Exam
+Output File -- The output file that you print should list each student's name (firstName lastName - no extra punctuation between), Final Exam grade, final average (printed to 2 decimal places), and letter grade (based on 10 point scale, i.e. 90-100 A, 80-89 B, etc). Output should be separated by subject, with an appropriate heading before each section, and each student's information listed on a separate line, in an organized fashion. (See example below). Data must line up appropriately in columns when multiple lines are printed in the file. At the bottom of the output file, print a grade distribution of ALL students -- how many As, Bs, Cs, etc. 
+ 
+5.	General Requirements
+o	No global variables, other than constants!
+o	All member data of your classes must be private or protected
+o	Use the const qualifier on member functions wherever it is appropriate.
+o	The code for this program should be portable. Test with g++ compiler commands before submitting
+o	You may use any of the standard I/O libraries that have been discussed in class (iostream, iomanip, fstream, as well as C libraries, likecstring, cctype, etc). You may also use the string class library
+o	You may not use any of the other STL (Standard Template Libraries) besides string
+o	You should have already seen basic C++ file I/O techniques and I/O formatting in your pre-requisite course. If you need a refresher, see the following notes sets from COP 3014, Summer 2010:
+?	File I/O and Stream Objects
+?	Output Stream Formatting
+Extra Credit
+Within each subject in the output file, list the students in alphabetic order, sorted by last name. Do not change the given case (upper/lower case) of the names that were read from the input file when you print the output file, and do not change the output file format. Just print the records in order by last name. This sort needs to be true alphabetical (not just the "lexicographical" sort).
+________________________________________
+Sample run
+Screen input and output:  (keyboard input is underlined)
+Please enter the name of the input file. 
+Filename: test.txt 
+Please enter the name of the output file. 
+Filename: outfile.txt
+Processing Complete 
+________________________________________
+Sample input file: (Get a copy here)
+6
+Squarepants, Spongebob
+Computer Science 90 72 85 96 100 88 80 91 92
+Finklebottom, Joe 
+Biology 85 90 78 85 89
+Dipwart, Marvin
+Theater 85 72 95   
+van Houten, Milhouse
+Computer Science 45 57 26 79 54 52 60 71 63
+Simpson, Homer J.
+Theater 82 76 74    
+Cyrus, Miley
+Biology 74 65 58 62 71
+________________________________________
+
+Corresponding output file:
+Student Grade Summary 
+--------------------- 
+
+BIOLOGY CLASS 
+
+Student                                   Final   Final   Letter 
+Name                                      Exam    Avg     Grade 
+---------------------------------------------------------------- 
+Joe Finklebottom                          89      85.70   B 
+Miley Cyrus                               71      67.70   D 
+  
+
+THEATER CLASS 
+
+Student                                   Final   Final   Letter 
+Name                                      Exam    Avg     Grade 
+---------------------------------------------------------------- 
+Marvin Dipwart                            95      85.25   B 
+Homer J. Simpson                          74      77.70   C 
+  
+
+COMPUTER SCIENCE CLASS 
+
+Student                                   Final   Final   Letter 
+Name                                      Exam    Avg     Grade 
+---------------------------------------------------------------- 
+Spongebob Squarepants                     92      88.35   B 
+Milhouse van Houten                       63      60.75   D 
+
+
+OVERALL GRADE DISTRIBUTION
+
+A:   0 
+B:   3 
+C:   1
+D:   2
+F:   0
+________________________________________
+
+Submit your files in the usual way, through the web submission page.  Submit all source code files that you write for this program.  This should include a set of classes (base and derived), along with the main program described above.
+
+Programming Assignment #7
+Due: Fri, Dec 5
+This assignment is an exercise on linked lists 
+ 
+________________________________________
+Before You Start
+Here is the Linked List example that we looked at in lecture class (From Deitel edition 5). Here are links to copies of the files:
+•	listnode.h
+•	list.h
+You will need these files for the exercise
+________________________________________
+Task
+Modify the List class (file list.h so that it has two more functions, which will allow inserts and removes from anywhere in the linked list. Your functions should be called:
+•	insertMiddle
+•	removeMiddle
+Your functions should have all the same features as the given insert and remove functions, except that yours each have one extra parameter. The second parameter on each of your functions should be of type int, representing the position at which to insert (or delete). Sample calls for a list of integers:
+  L.insertMiddle(345, 5);	// attempts to insert the value 345
+				//  as the 5th item in the list
+
+  L.removeMiddle(x, 10);	// attempts to delete the 10th item in the
+				//  list and captures its value into x.
+For insertMiddle, if the position number is larger than the number of items in the list, just insert the item at the back. If it's too small (i.e. 0 or less), insert at the front. For removeMiddle, return false if the position is invalid (without removing anything).
+I've modified the menu program of Figure 21.5 so that it adds in two more menu options for testing these features. You can use it to test your class:menu7.cpp 
+ 
+________________________________________
+Submitting:
+Submit the file:
+  list.h
+

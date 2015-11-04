@@ -1,0 +1,13 @@
+int height(BSTNode *t) const;
+
+template<typename T>
+int BST<T>::height(BSTNode* t) const
+{
+	if (t == nullptr)
+	{
+		return -1;		
+	}
+	return 1 + max(height(t->left), height(t->right));
+}
+
+Because this traverses every node in the tree with potentially a constant due to the empty nodes the big-O notation is O(n)

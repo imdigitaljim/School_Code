@@ -1,0 +1,9 @@
+8
+Bunny,Bugs,M,99,96,93
+Schmuckatelli,Joe,H,88,75,90
+Dipwart,Marvin,E,95,76,88
+Phebus,Billy Joe Bob,M,75,72,91
+Polinski,Axelrod,E,42,67,73
+Lewinsky,Monica,H,60,68,51
+Crack Corn,Jimmy,M,59,78,68
+Kirk,James T.,E,80,68,88

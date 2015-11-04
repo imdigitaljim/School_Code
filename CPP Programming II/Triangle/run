@@ -1,0 +1,5 @@
+make clean
+make
+hw1.out > hw1txt
+hw1.out
+

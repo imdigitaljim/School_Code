@@ -1,0 +1,32 @@
+James Bach
+COP4531
+Assignment 2
+
+Machine: Linprog
+
+External dependencies:
+#include <iostream>
+#include <iomanip>
+#include <chrono>
+#include <cstring>
+#include <fstream>
+#include <vector>
+#include <string>
+
+
+The code can be compiled using 'make'
+
+make clean - remove all executables and object code
+
+The program can be run using the assignment required:
+'algorithm <sortname> <filename>'
+
+Additionally, the program will run using 'algorithm'
+which can allow randomization of data and timing for test cases.
+The printing has been commented out for console reading, however,
+if you want to output to a file:
+uncomment the print lines, edit the 'in' file for the desired
+configuration, and you can redirect the output and check for array
+correctness of the test cases
+'algorithm < in > out'
+

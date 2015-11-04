@@ -1,0 +1,136 @@
+===================================
+Problem statement:
+===================================
+Design and implement a basic shell interface that supports
+input/output redirection, pipes, bachground processing,
+and a series of built-in functions as specified in the
+description.  The shell must be robust (it should not crash
+under any circumstances beyond machine failure).  The
+required features should adhere to the operational semantics
+of the bash shell.
+
+===================================
+Steps taken to solve the problem
+===================================
+
+1. Implemented a custom vector class to be used with the project.
+2. Began implementation of input parsing.
+3. Studied write-up and bash implementation for guidance.
+4. Finalized input white-spacing processing, ensuring uniform input formats.
+5. Completed all input parsing.
+6. Began build-in command implementation.
+7. Changed direction of project.  Removed vector class, used char** instead.
+8. Implemented command execution.
+9. Implemented piping and input/output redirection.
+10. Completed built-in command implementation
+11. I/O redirection partially implemented
+===================================
+Assumptions
+===================================
+Input lines would have less than 512 arguments/characters.
+
+===================================
+System calls
+===================================
+stdio.h - input, output (printf, etc.)
+
+string.h - strtok, strcpy, strcat, etc.
+
+stdlib.h - malloc, free, getenv, exit
+
+stdbool.h - bools
+
+unistd.h - chdir, execv, fork, etc.
+
+sys/time.h - gettimeofday
+
+sys/wait.h - waitpid
+
+===================================
+Problems
+===================================
+-custom vector class proved problematic to implement (and unnecessary)
+-execv was tricky to implement correctly
+-memory leaks were widespread
+
+===================================
+Known bugs
+===================================
+
+
+===================================
+Division of Labor
+===================================
+Jim Bach
+-input parsing
+-command execution
+-i/o redirection
+-piping
+Matthew Harrison
+-build-in commands
+-documentation
+Robert Tuttle
+-testing and debugging
+
+===================================
+Slack Days Used
+===================================
+0 days for Jim Bach
+0 days for Matthew Harrison
+0 days for Robert Tuttle
+
+===================================
+Log
+===================================
+
+9/25/15
+-i/o redirection close to operational
+-limits built-in command implemented
+
+9/24/15
+-execv commands almost fully implemented
+-bug fixes and error checking performed
+
+9/23/15
+-execv partially working
+
+9/19/15
+-implemented etimes command
+-researched limits command
+
+9/16/15
+-completed path resolution
+-prevented memory leaks
+
+9/15/15
+-began implementation of build-in commands
+
+9/13/15
+-removed vector class from project
+
+9/4/15
+-Tuttle joins team
+
+9/2/15
+-added path resolution
+-implemented expansion of variables
+
+9/1/15
+-studied project write-up and bash shell for guidance
+
+8/31/15
+-added input read and vector to makefile
+-began whitespace removal
+
+8/30/15
+-created custom vector class
+
+8/29/15
+-modified makefile
+-started main loop
+
+8/28/15
+-project assigned
+-discussed overall approach
+-created initial makefile
+-began main.c

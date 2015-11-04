@@ -1,0 +1,16 @@
+﻿body
+{
+    font-family: Arial;
+    color: white;
+    background-color: black;
+}
+h1
+{
+    font-family: Razer Header Regular;
+    color: red;
+}
+h2
+{
+    font-family: Razer Header Light;
+    color: cyan;
+}

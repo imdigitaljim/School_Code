@@ -1,0 +1,24 @@
+/*	James Bach
+	COP4530
+	Algorithm Analysis 
+*/	
+
+template <typename T>
+typename Vector<T>::iterator Vector<T>::erase(iterator itr)
+{   
+    iterator newIter = nullptr; // 1 
+    if (!empty()) // 1
+    {
+        newIter = &array[itr - begin()]; // 2
+        for (int i = itr - begin() + 1; i < theSize; i++) //3 + n + n
+        {
+            array[i - 1] = array[i]; //2n
+        }
+        theSize--; //1
+    }
+    return newIter; 
+}
+
+
+The estimated complexity of this function is 8 + 4n, but since we ignore lower order 
+and the constants the Worst-Case Complexity = O(n)

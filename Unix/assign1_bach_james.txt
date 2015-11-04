@@ -1,0 +1,136 @@
+COP3353 - Fall 2014
+Assignment 1 Solution - Due 9-18-14
+Name: James Bach
+Question 1 (10 points):
+----------------------------------------------------------------------------
+
+
+a.Hard Drive - a component used to store long term memory such as pictures, documents,
+music, movies, etc using magnetic disks.
+
+Processor/CPU - a component that is the brain of the computer performing all calculations 
+and processing of information
+
+b. pico file1.txt
+c. 	1. ^u
+	2. ^x
+	3. ^o
+	4. ^k
+	5. ^v
+
+d. sh, ksh
+cs accounts default on tcsh
+
+Question 2 (10 points):
+----------------------------------------------------------------------------
+
+
+a. pwd
+b. mkdir COP3353-hw1
+c. cd COP3353-hw1
+d. mkdir assign1 assign2
+e. ls
+f. rmdir assign2
+g. ls -l
+
+bach@shell:~>pwd
+/home/majors/bach
+bach@shell:~>mkdir COP3353-hw1
+bach@shell:~>cd COP3353-hw1
+bach@shell:~/COP3353-hw1>mkdir assign1 assign2
+bach@shell:~/COP3353-hw1>ls
+assign1  assign2
+bach@shell:~/COP3353-hw1>rmdir assign2
+bach@shell:~/COP3353-hw1>ls -l
+total 4
+drwx------ 2 bach CS-Majors 4096 Sep 10 17:51 assign1
+
+
+Question 3 (10 points):
+----------------------------------------------------------------------------
+
+
+a. cd assign1
+b. mkdir Files
+c. touch MyFile.txt
+d. pico MyFile.txt
+e. cat MyFile.txt
+f. mv MyFile.txt Files/t_1.txt
+g. cd Files
+h. cp t_1.txt t_2.txt
+i. ls -l
+j. rm t_1.txt
+k. ls
+
+
+bach@shell:~/COP3353-hw1>cd assign1
+bach@shell:~/COP3353-hw1/assign1>mkdir Files
+bach@shell:~/COP3353-hw1/assign1>touch MyFile.txt
+bach@shell:~/COP3353-hw1/assign1>pico MyFile.txt
+   UW PICO(tm) 4.10               File: MyFile.txt                              
+
+seminoles
+tigers
+
+                               [ Wrote 2 lines ]
+
+bach@shell:~/COP3353-hw1/assign1>cat MyFile.txt
+seminoles
+tigers
+bach@shell:~/COP3353-hw1/assign1>mv MyFile.txt Files/t_1.txt
+bach@shell:~/COP3353-hw1/assign1>cd Files
+bach@shell:~/COP3353-hw1/assign1/Files>cp t_1.txt t_2.txt
+bach@shell:~/COP3353-hw1/assign1/Files>ls -l
+total 8
+-rw------- 1 bach CS-Majors 17 Sep 10 17:53 t_1.txt
+-rw------- 1 bach CS-Majors 17 Sep 10 17:55 t_2.txt
+bach@shell:~/COP3353-hw1/assign1/Files>rm t_1.txt
+bach@shell:~/COP3353-hw1/assign1/Files>ls
+t_2.txt
+
+Question 4 (10 points):
+----------------------------------------------------------------------------
+
+
+a. cd ../..
+b. mkdir assign3
+c. touch Test_1.txt Test_2.txt Test_1-1.txt Test_2-1.txt Test_1-2.xtxt Test_2-2.xtxt Test_1-1.bak Test_2-2.bak File_1.bat
+d. ls
+e. ls *txt
+f. ls *t
+g. cp *t_1* assign3
+h. ls assign3
+
+bach@shell:~/COP3353-hw1/assign1/Files>cd ../..
+bach@shell:~/COP3353-hw1>mkdir assign3
+bach@shell:~/COP3353-hw1>touch Test_1.txt Test_2.txt Test_1-1.txt Test_2-1.txt Test_1-2.xtxt Test_2-2.xtxt Test_1-1.bak 
+Test_2-2.bak File_1.bat
+bach@shell:~/COP3353-hw1>ls
+assign1  File_1.bat    Test_1-1.txt   Test_1.txt    Test_2-2.bak   Test_2.txt
+assign3  Test_1-1.bak  Test_1-2.xtxt  Test_2-1.txt  Test_2-2.xtxt
+bach@shell:~/COP3353-hw1>ls *txt
+Test_1-1.txt   Test_1.txt    Test_2-2.xtxt
+Test_1-2.xtxt  Test_2-1.txt  Test_2.txt
+bach@shell:~/COP3353-hw1>ls *t
+File_1.bat    Test_1-2.xtxt  Test_2-1.txt   Test_2.txt
+Test_1-1.txt  Test_1.txt     Test_2-2.xtxt
+bach@shell:~/COP3353-hw1>cp *t_1* assign3
+bach@shell:~/COP3353-hw1>ls assign3
+Test_1-1.bak  Test_1-1.txt  Test_1-2.xtxt  Test_1.txt
+
+
+Question 5 (10 points):
+----------------------------------------------------------------------------
+
+a. /user/Alice
+b. /user/Bob/cat/Felix
+c. /etc
+d. /user/Bob/bird/Tweety
+
+e. cd ../..
+f. cd ../../Carl
+g. cd ../cat/Garfield
+
+h. 	1. cd ../cat/Felix
+	2. cd /user/Bob/cat/Felix
+	3. cd ~/cat/Felix

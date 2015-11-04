@@ -1,0 +1,135 @@
+BODY {
+	FONT-FAMILY: Tahoma, Arial, Verdana, sans-serif;
+	FONT-SIZE: 11px;
+	COLOR: #3A3929;
+	BACKGROUND-COLOR:#FFFFFF;
+	text-align: center;
+	MARGIN:0px;
+}
+
+TD {
+	FONT-FAMILY: Tahoma, Arial, Verdana, sans-serif;
+	FONT-SIZE: 11px;
+	COLOR: #3A3929;
+}
+
+.form_element{
+	WIDTH:96%;
+}
+
+#page{
+	border: 0px solid black;
+	margin: 0 auto 0 auto;
+	text-align: left;
+	width: 800px;
+}
+#top{
+background-image: url(images/headt.jpg);
+  height: 217px;
+  width: 800px;
+}
+#menu a {
+  position: absolute;
+  height: 145px;
+  width: 130px;
+  top: 72px; 
+  left: 45px;
+}
+
+a#b1{ left: 45px; top: 72px; width: 130px; height: 37px; }
+a#b2{ left: 45px; top: 109px; width: 130px; height: 33px; }
+a#b3{ left: 45px; top: 142px; width: 130px; height: 32px; }
+a#b4{ left: 45px; top: 174px; width: 130px; height: 43px; }
+
+.date{
+	COLOR:#97957E;
+	FONt-WEIGHT:bold;
+	margin-bottom:3px;
+}
+
+.px10{
+	FONT-SIZE:10px;
+}
+
+#c{
+	background:url(images/bg_l.jpg) no-repeat 0px 0px;
+	background-color:#D8D6B6;
+	width:700px;
+	overflow:auto;
+}
+
+#col_l{
+	float:left;
+	width:600px;
+	margin-right:35px;
+	padding-bottom:20px;
+}
+
+#col_r{
+	float:right;
+}
+
+.new_col{
+	float:left;
+	width:29%;
+	padding-right:15px;
+	margin-bottom:30px;
+}
+
+#f{
+	float:left;
+	background:url(images/f.gif) repeat-x 0px 0px;
+	width:100%;
+	height:93px;
+}
+
+#fl{
+	background:url(images/fl.gif) no-repeat 0px 0px;
+	height:93px;
+}
+
+#fr{
+	background:url(images/fr.gif) no-repeat 100% 0px;
+	height:93px;
+	text-align:center;
+	color:#000000;
+	padding-top:20px;
+	line-height:20px;
+	font-size:10px;
+}
+
+H1 {
+	FONT-SIZE: 16px;
+	COLOR: #3A3929;
+	MARGIN:0px 0px 15px 0px;
+}
+P{
+	FONT-FAMILY: Tahoma, Verdana, sans-serif;
+	TEXT-INDENT: 0px;
+	FONT-SIZE: 11px;
+	COLOR: #3A3929;
+	MARGIN:0px 0px 10px 0px;
+}
+LI {
+	COLOR: #3A3929;
+	LIST-STYLE-IMAGE:url(images/li.gif);
+	MARGIN-BOTTOM:2px;
+}
+UL{
+	MARGIN:0px 0px 10px 20px;
+	padding: 0;
+}
+INPUT{
+	FONT-SIZE: 11px;
+	COLOR: #3A3929;
+    margin-left: 0px;
+}
+TEXTAREA{
+	FONT-FAMILY: Tahoma, sans-serif;
+	FONT-SIZE: 11px;
+	COLOR: #3A3929;
+}
+
+A,A:active,A:visited,A:hover{
+	COLOR: #FF6000;
+}

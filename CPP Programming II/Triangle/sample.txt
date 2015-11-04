@@ -1,0 +1,128 @@
+t1 has size = 1 units.
+# 
+
+t2 has size = 7 units.
+      ^ 
+     ^ ^
+    ^ * ^
+   ^ * * ^
+  ^ * * * ^
+ ^ * * * * ^
+^ ^ ^ ^ ^ ^ ^
+
+t3 has size = 12 units.
+           X 
+          X X
+         X O X
+        X O O X
+       X O O O X
+      X O O O O X
+     X O O O O O X
+    X O O O O O O X
+   X O O O O O O O X
+  X O O O O O O O O X
+ X O O O O O O O O O X
+X X X X X X X X X X X X
+
+t4 has size = 39 units.
+                                      $ 
+                                     $ $
+                                    $ o $
+                                   $ o o $
+                                  $ o o o $
+                                 $ o o o o $
+                                $ o o o o o $
+                               $ o o o o o o $
+                              $ o o o o o o o $
+                             $ o o o o o o o o $
+                            $ o o o o o o o o o $
+                           $ o o o o o o o o o o $
+                          $ o o o o o o o o o o o $
+                         $ o o o o o o o o o o o o $
+                        $ o o o o o o o o o o o o o $
+                       $ o o o o o o o o o o o o o o $
+                      $ o o o o o o o o o o o o o o o $
+                     $ o o o o o o o o o o o o o o o o $
+                    $ o o o o o o o o o o o o o o o o o $
+                   $ o o o o o o o o o o o o o o o o o o $
+                  $ o o o o o o o o o o o o o o o o o o o $
+                 $ o o o o o o o o o o o o o o o o o o o o $
+                $ o o o o o o o o o o o o o o o o o o o o o $
+               $ o o o o o o o o o o o o o o o o o o o o o o $
+              $ o o o o o o o o o o o o o o o o o o o o o o o $
+             $ o o o o o o o o o o o o o o o o o o o o o o o o $
+            $ o o o o o o o o o o o o o o o o o o o o o o o o o $
+           $ o o o o o o o o o o o o o o o o o o o o o o o o o o $
+          $ o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+         $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+        $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+       $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+      $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+     $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+    $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+   $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+  $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+ $ o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o o $
+$ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $ $
+
+t1 now has size = 1 units.
+t2 now has size = 6 units.
+t3 now has size = 13 units.
+t4 now has size = 39 units.
+t2 has perimeter = 18 units.
+t3 has perimeter = 39 units.
+t2 has area = 15.59 square units.
+
+t3 has area = 73.18 square units.
+
+# 
+t1 grows:
+ # 
+# #
+... and grows:
+  # 
+ # #
+# # #
+
+t1 now has size = 6 units.
+     ^ 
+    ^ ^
+   ^ * ^
+  ^ * * ^
+ ^ * * * ^
+^ ^ ^ ^ ^ ^
+t2 now looks like:
+     @ 
+    @ @
+   @ - @
+  @ - - @
+ @ - - - @
+@ @ @ @ @ @
+
+t2 now looks like:
+     # 
+    # #
+   # * #
+  # * * #
+ # * * * #
+# # # # # #
+
+
+Here is a summary on t3:
+Size of triangle's side = 13 units.
+Perimeter of triangle = 39 units.
+Area of triangle = 73.18 units.
+Triangle looks like:
+            X 
+           X X
+          X O X
+         X O O X
+        X O O O X
+       X O O O O X
+      X O O O O O X
+     X O O O O O O X
+    X O O O O O O O X
+   X O O O O O O O O X
+  X O O O O O O O O O X
+ X O O O O O O O O O O X
+X X X X X X X X X X X X X

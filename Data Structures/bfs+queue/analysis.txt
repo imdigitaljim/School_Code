@@ -1,0 +1,10 @@
+Analysing the worst-case time complexity of the member function pop() of Queue. Give the complexity in the form of Big-O. Your analysis can be informal; however, it must be clearly understandable by others. Name the file containing the complexity analysis as "analysis.txt".
+
+template <typename T>
+void Queue<T>::pop()
+{
+	container.pop_front();
+}
+
+Since my container is a list the complexity of the pop() listed above is O(1)
+because it simply just removes the element directly, there is no iteration.

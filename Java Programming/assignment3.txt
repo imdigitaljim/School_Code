@@ -1,0 +1,41 @@
+Simple is as simple does… it’s time to start picking up the pace a bit…
+
+How about starting by saying good-bye to compiling/running via the command line and jumping right into our Eclipse IDE. 
+
+So, let us continue our story with our young knight of the round table. Being a knight isn’t easy… battle here, battle there and from the looks of things, there’s going to be quite a few battles in the very near future, so in order to maintain sanity and relax, our valiant knight enjoys lying out in the fields at night enjoying the stars.
+
+Notice that there was mention of future battles. Soooo, battles…. Let’s see…. It’s a bit difficult to fight with yourself (we’ll assume that our knight is not schizophrenic), so this means that we will be dealing with multiple knights in the near future, right? Now bears the question… do we want to rewrite the same code over and over that maintains the attributes of our knight? Of course not and this is where we start creating classes from which we’ll instantiate our knight (and other) objects. 
+
+Acceptance Criteria:
+1. You’ll need public classes:
+ public class Knight
+ public class Stars
+2. You’ll need to create a driver class which will contain your main method:
+ public class KnightDriver
+3. We need the ability to enter the Knight’s attributes (name, health, number of battles, age, and amount of gold procured from pillaging) using the constructor from class Knight.
+4. Instance variables must be accessed via set and get methods.
+5. Command line interaction is boring, so we’ll need to spice things up with Dialog boxes utilizing the javax.swing package for our input.
+6. You’ll need 7 input dialog boxes. Five for the knight’s attributes. Two for the number of starts (rows & columns) that the knight will be viewing.
+7. Notice in the sample output that the stars are not blocked, this is how your output should be as well.
+8. The output can be via the command line or if you’d like to get fancy, via a dialog box.
+9.  Do not use any mechanisms beyond the scope of Chapter's 1-4.
+10.  Zip up and submit your KnightDriver.java, Knight.java & Stars.java files.
+
+ 
+
+Sample Output:
+
+Knight Name: Sir Jav-a-lot
+Knight Health: 12
+Knight Battles: 6
+Knight Age: 25
+Knight Gold: $100
+
+* * * * * * * * * *  
+ * * * * * * * * * *  
+* * * * * * * * * *  
+ * * * * * * * * * *  
+* * * * * * * * * *  
+ * * * * * * * * * *  
+* * * * * * * * * *  
+ * * * * * * * * * *

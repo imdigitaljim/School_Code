@@ -1,0 +1,3 @@
+Hello.  How are you?
+I am 4 years old.  My favorite color is blue.
+Next year I will be 5.  My IP address is 128.4.0.46

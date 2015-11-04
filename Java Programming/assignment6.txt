@@ -1,0 +1,19 @@
+One of the items that I feel is extremely under utilized is Exception Handling, which is why Assignment 6 will focus on just that.  Unfortunately, we won't get to use Sir Jav-a-lot for this assignment...  Bummer, I know...
+
+Anywhooo, in this situation, we’ll use exception handling for input validation, which in turn, helps to ensure that we’re writing more robust and more fault-tolerant programs.
+
+Ok, so the idea here is that we’re attempting to write a program that allows a user to input integer values into a 10-element array and, in addition, will also allow the searching of the array. This program should allow the user to retrieve values from the array by index or by specifying a value to locate. The program should handle any exceptions that might arise when inputting values or accessing array elements. The program should throw a NumberNotFoundException if a particular value cannot be found in the array during a search. If an attempt is made to access an element outside the array bounds, catch the ArrayIndexOutOfBoundsException and display an appropriate error message. Also, the program should throw an Array-IndexOutOfBoundsException if an attempt is made to access an element for which the user has not yet input a value.
+
+Now for the good news, this is an assignment, not a project…. Most of this code is bring provided for you!  The focus is that you understand the value of Exception Handling and how to implement try/catch blocks within your code.  Attached below, you’ll find the template code for Assignment 5 that represents a complete working Java program with one or more key lines of code replaced with comments. 
+
+ArrayAccess(1).java        ArrayAccessDriver(1).java       NumberNotFoundException(1).java 
+
+Using the helpful hints as a guide, replace the /* */ comments with Java code. Compile and execute the
+program. Compare your output with the sample output provided. 
+Acceptance Criteria:
+1.  Output is reflective of the sample output provided.
+2.  Zip up and submit your ArrayAccess.java, ArrayAccessDriver.java and NumberNotFoundException.java
+Helpful Hints:
+1. When you search the array for a value, you should define a boolean value at the beginning of the try block and initialize it to false. If the value is found in the array, set the boolean value to true. This will help you determine whether you need to throw an exception due to a search key that is not found.
+2. Refer to the sample output to decide what messages to display in the error dialogs.
+3. Each of the three event handlers will have its own try statement.

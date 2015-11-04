@@ -1,0 +1,22 @@
+Ok, so now that Assignment 1 is complete, let's get down to business.  For Assignment 2, we'll continue to compile/run our Java programs from the command line.  For this story, we need to create a fictional character from the land of Camelot.  Our character will be a knight from the round table who you can name what you wish. We'll call ours Sir Jav-a-lot.   
+
+We'll need to know a few things about our knight such as his name(hint:String), health(hint:int), number of battles, age, and amount of gold procured from pillaging.
+
+To keep track of all of these attributes, we'll need to create a container to hold each of the specified pieces of information above.
+
+To populate each of these containers, we'll need to have a way of entering data from the user.
+
+To get an overall picture of your knight, we'll need a way to export all of these attributes to the screen.
+
+Hint: You can use Scanner's next() method to gather the String name. 
+
+Acceptance Criteria:
+1.  Ability to enter Sir Jav-a-lot's attributes.
+2.  Sir Jav-a-lot's information will be shown on the screen.
+     a.  In addition to showing each of Sir Jav-a-lot's attributes, we need to know the average gold accumulated per battle.
+3.  This is to be a command line interface only.
+4.  Do not use any mechanisms beyond the scope of Chapter's 1 & 2.
+5. Output must be displayed using the printf method.
+6.  Submit your Assignment2.java file.
+
+Zip up the files and title the zip with the following format:  lastname, first initial, underscore, assign2 (ie John Doe would submit DoeJ_assign2.zip)
