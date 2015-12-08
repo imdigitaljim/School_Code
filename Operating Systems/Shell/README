@@ -1,15 +1,3 @@
-Member 1: Jim Bach
-Member 2: Matthew Harrison
-Member 3: Robert Tuttle
-
-p1-Bach-Harrison-Tuttle.tar contents:
-	README
-	report.txt
-	main.c		//main implementation
-	shellops.c	//shell definitions
-	shellops.h	//shell declarations/interface
-	makefile
-
 Completed using: linprog
 
 To run:
