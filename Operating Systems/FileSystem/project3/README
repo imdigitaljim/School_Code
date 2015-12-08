@@ -1,0 +1,32 @@
+Member 1: Jim Bach		FSUID:jmb14b
+Member 2: Matthew Harrison	FSUID:msh13d
+Member 3: Robert Tuttle		FSUID:ret14b
+
+p3-Bach-Harrison-Tuttle.tar contents:
+	project3/README
+	project3/report.txt
+	project3/src/fatmount.c
+	project3/src/fatmount.h
+	project3/src/makefile
+
+
+Completed using: linux version 4.2.0 via Linux Mint running on Virtual Box
+and using linprog
+/* makefile interface */
+
+To run project:
+make mutil
+
+To test:
+make mem
+
+To clean:
+make clean
+
+Known bugs:
+
+
+
+Additional comments:
+
+'fat32.img' file is required to be in the CWD of the mutil

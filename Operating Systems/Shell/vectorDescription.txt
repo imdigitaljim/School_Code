@@ -1,0 +1,11 @@
+This is a stripped down vector class with a few dedicated functions for this project
+(if we decide to use them).  I'll keep thinking about what I could add.  If you think
+of anything else I could throw in here, let me know.
+
+The first added function, vectorPrintPath, will print the
+contents of a vector in the form of a file path as specified in the project write-up.
+This way, we can store our paths in the vector, call this function, and we're good to
+go.
+
+The second one, vectorFindData, returns the index of a searched-for element in the vector.
+If the element is not in the vector, it returns -1.

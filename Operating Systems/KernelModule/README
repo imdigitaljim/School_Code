@@ -1,0 +1,52 @@
+Member 1: Jim Bach		FSUID:jmb14b
+Member 2: Matthew Harrison	FSUID:msh13d
+Member 3: Robert Tuttle		FSUID:ret14b
+
+p2-Bach-Harrison-Tuttle.tar contents:
+	README
+	report.txt
+	part1/Makefile
+	part1/part1.c
+	part2/Makefile
+	part2/my_xtime.c
+
+Completed using: linux version 4.2.0 via Linux Mint running on Virtual Box
+
+/* makefile interface */
+Part 1:
+To create executable:
+$>make part1
+
+To run strace on executable:
+$>make strace
+
+To clean:
+$>make clean
+
+Part 2:
+
+To compile:
+$>make
+
+To insert module:
+$>sudo insmod my_xtime.ko
+
+To remove module:
+$>sudo rmmod my_xtime
+
+To clean:
+$>make clean
+
+Part 3:
+
+Known bugs:
+
+To do:
+Finalize syscall tracing file
+Implement elevator proc module
+Implement start_elevator
+Implement issue_request
+Implement stop_elevator
+
+Additional comments:
+
