@@ -1,0 +1,19 @@
+To run this script, it looks for corpus.txt in the current working directory.  
+
+This twitterbot uses Python 3.5 with libraries:
+
+-Tweepy for Twitter posting
+-BeautifulSoup for parsing various metadata from the corpus
+-Markovify to apply Markov Chains to the corpus and generate sentences. 
+
+This twitterbot is designed to take in a corpus and develop 
+creative sentences using Markov Chains. The corpus I 
+developed and trained the bot consists of all of J.R.R. 
+Tolkien Lord of the Rings books and an equal part of JK 
+Rowling's Harry Potter series. I wanted to see the 
+twitterbot post comments, phrases, or storyline information 
+that mixes both universes. The markov chain chooses a 
+starting word and runs through the chain until it gets to an 
+end within 140 characters. It will continue to run until a valid sentence is generated.
+
+I have used Amazon Web Services for virtualization. The twitterbot is set up on Elastic Cloud Computing (EC2) instance and will run the script every hour.
