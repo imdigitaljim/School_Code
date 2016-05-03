@@ -17,3 +17,5 @@ starting word and runs through the chain until it gets to an
 end within 140 characters. It will continue to run until a valid sentence is generated.
 
 I have used Amazon Web Services for virtualization. The twitterbot is set up on Elastic Cloud Computing (EC2) instance and will run the script every hour.
+
+https://twitter.com/imdigitaljim
