@@ -1,0 +1,8 @@
+input_1mil.txt
+input_10k.txt
+input_100k.txt
+*.sdf
+*.sln
+*.vcxproj
+*.filters
+input.txt
