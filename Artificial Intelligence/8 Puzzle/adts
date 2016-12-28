@@ -1,0 +1,147 @@
+% This is identical to Luger's adts except with an additional predicate 
+% "add_list_to_stack" included with the stack operations
+
+% 2011 Have changed member to member1, union to union1, intersection to
+% intersection1, subset to subset1, since current version of Prolog
+% complains about modifying static predicates.  Also changed Y to _Y and T
+% to _T in member1 definition, and E to _E in remove-from-set definition to
+% get rid of Prolog warning about singleton variables.  
+
+%%%%%%%%%%%%%%%%%%%% stack operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	% These predicates give a simple, list based implementation of stacks
+
+	% empty stack generates/tests an empty stack
+
+member1(X,[X|_T]).
+member1(X,[_Y|_T]):-member1(X,_T).
+
+empty_stack([]).
+
+	% member_stack tests if an element is a member of a stack
+
+member_stack(E, S) :- member1(E, S).
+
+	% stack performs the push, pop and peek operations
+	% to push an element onto the stack
+		% ?- stack(a, [b,c,d], S).
+	%    S = [a,b,c,d]
+	% To pop an element from the stack
+	% ?- stack(Top, Rest, [a,b,c]).
+	%    Top = a, Rest = [b,c]
+	% To peek at the top element on the stack
+	% ?- stack(Top, _, [a,b,c]).
+	%    Top = a 
+
+stack(E, S, [E|S]).
+
+add_list_to_stack(List, Stack, Result) :- append(List, Stack, Result).
+
+%%%%%%%%%%%%%%%%%%%% queue operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	% These predicates give a simple, list based implementation of 
+	% FIFO queues
+
+	% empty queue generates/tests an empty queue
+
+
+empty_queue([]).
+
+	% member_queue tests if an element is a member of a queue
+
+member_queue(E, S) :- member1(E, S).
+
+	% add_to_queue adds a new element to the back of the queue
+
+enqueue(E, [], [E]).
+enqueue(E, [H|T], [H|Tnew]) :- enqueue(E, T, Tnew).
+
+	% remove_from_queue removes the next element from the queue
+	% Note that it can also be used to examine that element 
+	% without removing it
+	
+dequeue(E, [E|T], T).
+
+append_queue(First, Second, Concatenation) :- 
+	append(First, Second, Concatenation).
+
+add_list_to_queue([], Queue, Queue).
+add_list_to_queue([H|T], Queue, New_queue) :-
+        enqueue(H, Queue, Temp_queue),
+        add_list_to_queue(T, Temp_queue, New_queue).
+
+%%%%%%%%%%%%%%%%%%%% set operations %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	% These predicates give a simple, 
+	% list based implementation of sets
+	
+	% empty_set tests/generates an empty set.
+
+empty_set([]).
+
+member_set(E, S) :- member1(E, S).
+
+	% add_to_set adds a new member to a set, allowing each element
+	% to appear only once
+
+add_to_set(X, S, S) :- member1(X, S), !.
+add_to_set(X, S, [X|S]).
+
+remove_from_set(_E, [], []).
+remove_from_set(_E, [_E|T], T) :- !.
+remove_from_set(_E, [H|T], [H|T_new]) :-
+	remove_from_set(_E, T, T_new), !.
+	
+union1([], S, S).
+union1([H|T], S, S_new) :- 
+	union1(T, S, S2),
+	add_to_set(H, S2, S_new).	
+	
+intersection1([], _, []).
+intersection1([H|T], S, [H|S_new]) :-
+	member_set(H, S),
+	intersection1(T, S, S_new),!.
+intersection1([_|T], S, S_new) :-
+	intersection1(T, S, S_new),!.
+	
+set_diff([], _, []).
+set_diff([H|T], S, T_new) :- 
+	member_set(H, S), 
+	set_diff(T, S, T_new),!.
+set_diff([H|T], S, [H|T_new]) :- 
+	set_diff(T, S, T_new), !.
+
+subset1([], _).
+subset1([H|T], S) :- 
+	member_set(H, S), 
+	subset1(T, S).
+
+equal_set(S1, S2) :- 
+	subset1(S1, S2), subset1(S2, S1).
+	
+%%%%%%%%%%%%%%%%%%%%%%% priority queue operations %%%%%%%%%%%%%%%%%%%
+
+	% These predicates provide a simple list based implementation
+	% of a priority queue.
+	
+	% They assume a definition of precedes for the objects being handled
+	
+empty_pq([]).
+
+member_pq(E, S) :- member(E, S).
+
+insert_pq(State, [], [State]).	
+insert_pq(State, [H | T], [State, H | T]) :- 
+	precedes(State, H).
+insert_pq(State, [H|T], [H | T_new]) :- 
+	insert_pq(State, T, T_new).	
+	
+dequeue_pq(First, [First|Rest], Rest).
+
+        %insert_list inserts a list of states obtained from a  call to
+        % bagof and  inserts them in a priotrity queue, one at a time
+
+insert_list_pq([], L, L).
+insert_list_pq([State | Tail], L, New_L) :-
+        insert_pq(State, L, L2),
+        insert_list_pq(Tail, L2, New_L).
