@@ -1,0 +1,3 @@
+*.o
+Compiler Construction/scanner-translation/myout
+Compiler Construction/scanner-translation/lextest
