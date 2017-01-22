@@ -17,9 +17,7 @@ int lexan() //returns tokens it found
 		{ 
 			ungetc(t, stdin);
 			scanf("%d", &tokenval);
-			if (tokenval < INT8_MAX) return INT8;
-			else if (tokenval < INT16_MAX) return INT16;
-			else return INT32;
+			return NUM;
 		}
 		else if (isalpha(t) || t == '_')
 		{ 
@@ -32,7 +30,12 @@ int lexan() //returns tokens it found
 				if (b >= BSIZE) error("compiler error");
 			}
 			lexbuf[b] = EOS;
-			if (t != EOF) ungetc(t, stdin);			
+			if (t != EOF) ungetc(t, stdin);
+			if(strcmp(lexbuf,"arg") == 0)
+			{
+				tokenval = NONE;
+				return ARG;
+			}				
 			p = lookup(lexbuf);
 			if (p == 0)
 			{ 				

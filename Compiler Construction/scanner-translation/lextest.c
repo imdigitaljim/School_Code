@@ -3,44 +3,176 @@
 
 /*
 { n = 2; m = 1000*n+arg[0]; }
-
 <{,-1> <ID,3> <=,-1> <INT8, 2> <;,-1> <ID,4> <=,-1> <INT16,1000> <*,-1> <ID,3> <+,-1><ARG,-1> <[,-1> <INT8,0> <],-1> <;,-1> <},-1>
 */
+int stmt();
+void parse(), opt_stmts(), expr(), moreterms(), term(), morefactors(), factor();
+void match(int tok);
 
+int lookahead;
 int main()
 {
 	init();
-	while(1)
+	parse();
+	return 0;
+}
+
+void parse()
+{
+	lookahead = lexan();
+	stmt();
+	match(DONE);
+}
+
+void match(int tok)
+{
+	if (lookahead <= 255)
 	{
-		int token = lexan();
-		if (token == DONE) break;
-		if (token <= 255) /* WTF - is it ADD/MULT/ETC? */
+		printf("<%c,%d>\n", lookahead, tokenval);
+	}
+	if (lookahead == tok)
+	{
+		lookahead = lexan();
+	}
+	else
+	{
+		error("match mismatch");
+	}
+}
+
+int stmt()
+{
+	if (lookahead == '{')
+	{
+		match('{'); opt_stmts(); match('}');
+	}
+	else if (lookahead == ID)
+	{
+		//int lexeme_sym_index = tokenval;
+		printf("<ID,%d>\n", lookup(lexbuf) - keywords_count + 2); /* WTF - offset from keywords? */	
+		match(ID); match('='); expr(); match(';');
+	}
+	else if (lookahead == IF)
+	{
+		match(IF); match('('); expr();match(')'); stmt(); match(ELSE); stmt();
+	}
+	else if (lookahead == WHILE)
+	{
+		match(WHILE); match('('); expr(); match(')'); stmt();
+	}
+	else if (lookahead == RETURN)
+	{
+		match(RETURN); expr(); match(';');
+	}
+	else
+	{
+		return NONE;
+	}
+	return 0;
+}
+void opt_stmts()
+{
+	if (stmt() != NONE)
+	{
+		opt_stmts();
+	}
+}
+
+void expr()
+{
+	term(); moreterms();
+}
+
+void moreterms()
+{
+	if (lookahead == '+')
+	{
+		match('+');	term();	moreterms();
+	}
+	else if (lookahead == '-')
+	{
+		match('-');	term();	moreterms();
+	}
+}
+
+void term()
+{
+	factor(); morefactors();
+}
+
+void morefactors()
+{
+	if (lookahead == '*')
+	{
+		match('*'); factor(); moreterms();
+	}
+	else if (lookahead == '/')
+	{
+		match('/'); factor(); moreterms();
+	}
+	else if (lookahead == '%')
+	{
+		match('%'); factor(); moreterms();
+	}
+}
+
+void factor()
+{
+	if (lookahead == '(')
+	{
+		match('('); expr();	match(')');
+	}
+	else if (lookahead == '-')
+	{
+		match('-'); factor();
+	}
+	else if (lookahead == NUM)
+	{
+		int num = tokenval;
+		match(NUM);
+		if (num < 0)
 		{
-			printf("<%c,%d>\n", token ,tokenval);
+			error("non-negative integer expected");
+		}
+		if (num < INT8_MAX)
+		{
+			printf("<INT8,%d>\n", num);
+		}
+		else if (num < INT16_MAX)
+		{
+			printf("<INT16,%d>\n", num);
+		}
+		else 
+		{
+			printf("<INT32,%d>\n", num);
+		}	
+	}
+	else if (lookahead == ID)
+	{	
+		//int lexeme_sym_index = tokenval;
+		printf("<ID,%d>\n", lookup(lexbuf) - keywords_count + 2); /* WTF - offset from keywords? */
+		match(ID);
+	}
+	else if (lookahead == ARG)
+	{
+		int t = tokenval;
+		match(ARG);
+		printf("<ARG,%d>\n", t);
+		match('[');
+		t = tokenval;
+		match(NUM);
+		if (t < INT8_MAX && t >= 0)
+		{
+			printf("<INT8,%d>\n", t);
 		}
 		else
 		{
-			switch(token)
-			{
-				case ID:
-					printf("<ID,%d>\n", lookup(lexbuf) - keywords_count + 2); /* WTF - offset from keywords? */
-					break;
-				case INT8:
-					printf("<INT8,%d>\n", tokenval);
-					break;
-				case INT16:
-					printf("<INT16,%d>\n", tokenval);
-					break;
-				case INT32:
-					printf("<INT32,%d>\n", tokenval);
-					break;
-				case ARG:
-					printf("<ARG,%d>\n", tokenval);
-					break;
-				default:
-					break;				
-			}
+			error("integer constant out of range");
 		}
+		match(']');
 	}
-	return 0;
+	else
+	{
+		error("factor syntax");
+	}
 }

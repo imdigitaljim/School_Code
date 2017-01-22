@@ -11,13 +11,15 @@
 #define BSIZE 128
 #define NONE -1
 #define EOS '\0'
-#define ARG -1
+
 
 #define IF 256
 #define ELSE 257
 #define WHILE 258
 #define RETURN 259
 
+#define ARG 298
+#define NUM 299
 #define DONE 300
 #define ID 301
 #define INT8 302
