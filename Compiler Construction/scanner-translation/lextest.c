@@ -93,6 +93,10 @@ void moreterms()
 	{
 		match('-');	term();	moreterms();
 	}
+	else
+	{
+		
+	}
 }
 
 void term()
@@ -113,6 +117,10 @@ void morefactors()
 	else if (lookahead == '%')
 	{
 		match('%'); factor(); moreterms();
+	}
+	else
+	{
+		
 	}
 }
 
