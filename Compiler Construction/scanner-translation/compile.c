@@ -3,10 +3,6 @@
 #include "bytecode.h"
 #include "javaclass.h"
 
-/*
-{ n = 2; m = 1000*n+arg[0]; }
-<{,-1> <ID,3> <=,-1> <INT8, 2> <;,-1> <ID,4> <=,-1> <INT16,1000> <*,-1> <ID,3> <+,-1><ARG,-1> <[,-1> <INT8,0> <],-1> <;,-1> <},-1>
-*/
 int stmt();
 void parse(), opt_stmts(), expr(), moreterms(), term(), morefactors(), factor();
 void match(int tok);
@@ -118,7 +114,6 @@ int stmt()
 	{
 		int lexeme_sym_index = lookup(lexbuf) - keywords_count + 2;
 		match(ID); match('='); expr(); 	
-		printf("storing in %d\n", lexeme_sym_index);
 		emit2(istore, lexeme_sym_index);
 		match(';');
 	}
@@ -131,7 +126,6 @@ int stmt()
 		stmt(); 
 		backpatch(loc, pc - loc);
 		match(ELSE); 
-		//***missing emit "goto next statement"
 		stmt();
 	}
 	else if (lookahead == WHILE)

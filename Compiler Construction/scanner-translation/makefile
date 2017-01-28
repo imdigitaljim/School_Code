@@ -23,4 +23,4 @@ Calc:		calcclass
 clean:
 		-rm -f *.o
 distclean:
-		-rm -f calcclass *.o *.class
+		-rm -f calcclass *.o *.class compile lextest 

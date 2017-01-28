@@ -1,0 +1,13 @@
+
+to make compiler:
+
+$ make 
+
+to run, e.g.:
+
+$ compile < prog1
+
+Example input: java Code 3
+
+Example output: 6
+
