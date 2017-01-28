@@ -9,10 +9,7 @@
 			pow = pow * n;
 			m = m - 1;
 		}
-		else
-		{
-			return 5 + -2;
-		}
+		else { }
 		if ( (m - 1) % 2)
 		{
 			n = n * n;
