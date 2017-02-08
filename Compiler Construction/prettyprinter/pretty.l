@@ -5,7 +5,6 @@
 	#define KEYWORD 256
 	#define ID 257
 	#include <string>
-	#include <vector>
 	#include <unordered_map>
 	
 	using namespace std;
@@ -53,18 +52,20 @@
 	
 %}
 
-QUOTE	[']
-DITTO	["]
+QUOTE	\'
+DITTO	\"
 DIGIT	[0-9]
 OCT		[0-7]
 EXP		[eE][+\-]?{DIGIT}+
 HEX		{DIGIT}|[a-fA-F]
 ALPHA	[a-zA-Z_]
 OPWEQ	("<<"|">>"|"^"|"|"|"&"|"+"|"-"|"/"|"*"|"%"|"!"|"="|">"|"<")
- 		
+BACK \\
+CH [^\n\'"]	
+
 %%
-{QUOTE}([^{QUOTE}]|\\{QUOTE})*{QUOTE} 						{ write_char(); 	}
-{DITTO}([^{DITTO}]|\\{DITTO})*{DITTO}						{ write_string();  	}
+{DITTO}({BACK}{CH}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{CH}|{QUOTE})*{DITTO}   {write_string(); }
+{QUOTE}({BACK}{CH}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{CH}|{DITTO})*{QUOTE}   {write_char(); }
 0{OCT}+ 													{ write_oct();		}
 0[Xx]{HEX}+													{ write_hex();		}
 {DIGIT}+													{ write_int();		}
@@ -82,7 +83,7 @@ OPWEQ	("<<"|">>"|"^"|"|"|"&"|"+"|"-"|"/"|"*"|"%"|"!"|"="|">"|"<")
 "//".*														{ write_inline(); 	}
 ^"#".*														{ write_directive();}
 [ \t\v\n\r\f]+												{ write_formatting();}
-.															{ fprintf(stderr, "Error: <%s> on line: %d\n", yytext, line);	}
+.															{ fprintf(stderr, "Error: <%s>\n", yytext);	}
 
 %%
 
@@ -96,7 +97,7 @@ int main()
 
 void yyFlexLexer::init_table()
 {
-	vector<string> keywords = {
+	string keywords[32] = {
 	"auto",	"break", "case", "char",
 	"const", "continue", "default",
 	"do", "double", "else",	"enum",
@@ -108,7 +109,7 @@ void yyFlexLexer::init_table()
 	"unsigned",	"void",	"volatile",
 	"while"	};
 
-	for (size_t i = 0; i < keywords.size(); i++)
+	for (size_t i = 0; i < 32; i++)
 	{
 		symbol_table[keywords[i]] = KEYWORD;
 	}
