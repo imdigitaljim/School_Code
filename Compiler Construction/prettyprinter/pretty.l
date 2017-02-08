@@ -1,22 +1,23 @@
 %top{
 	#include <stdio.h>
 	#include <stdlib.h>
+	#include <string>
+	#include <unordered_map>
 	#define INDENT (4)
 	#define KEYWORD 256
 	#define ID 257
-	#include <string>
-	#include <unordered_map>
-	
+
 	using namespace std;
 %}
 
 %class{
-	int line;
-	int column;
-	int paren;
-	// symbol table to store identifier names with line numbers
-	unordered_map<string, int> symbol_table;
-	private: 
+		int line;
+		int column;
+		int paren;
+	
+		// symbol table to store identifier names with line numbers
+		unordered_map<string, int> symbol_table;
+
 		void init_table();
 	public:
 		void write_indent();
@@ -44,6 +45,7 @@
 %}
 
 %init{
+
 	line = 1;
 	column = 4;
 	paren = 0;
@@ -61,29 +63,29 @@ HEX		{DIGIT}|[a-fA-F]
 ALPHA	[a-zA-Z_]
 OPWEQ	("<<"|">>"|"^"|"|"|"&"|"+"|"-"|"/"|"*"|"%"|"!"|"="|">"|"<")
 BACK \\
-CH [^\n\'"]	
+NONQDNL [^\n\'"]	
 
 %%
-{DITTO}({BACK}{CH}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{CH}|{QUOTE})*{DITTO}   {write_string(); }
-{QUOTE}({BACK}{CH}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{CH}|{DITTO})*{QUOTE}   {write_char(); }
-0{OCT}+ 													{ write_oct();		}
-0[Xx]{HEX}+													{ write_hex();		}
-{DIGIT}+													{ write_int();		}
-{DIGIT}*\.{DIGIT}*{EXP}?									{ write_fp();		}
-{ALPHA}({ALPHA}|{DIGIT})*									{ write_id();		}
-"{"															{ write_begin();	}
-"}"															{ write_end();		}
-"("															{ write_open();		}
-")"															{ write_close();	}
-{OPWEQ}[=]?|"++"|"--"|"||"|"&&"|"~"|","|"?"|":"|"."|"->"|","	{ write_op();	}
-"["															{ write_bopen();	}
-"]"															{ write_bclose();	}
-";"															{ write_sep();		}
-"/*"(.|\n)*"*/"												{ write_comment();	}
-"//".*														{ write_inline(); 	}
-^"#".*														{ write_directive();}
-[ \t\v\n\r\f]+												{ write_formatting();}
-.															{ fprintf(stderr, "Error: <%s>\n", yytext);	}
+{DITTO}({BACK}{NONQDNL}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{NONQDNL}|{QUOTE})*{DITTO}  	{	write_string(); 	}
+{QUOTE}({BACK}{NONQDNL}|{BACK}{BACK}|{BACK}{QUOTE}|{BACK}{DITTO}|{NONQDNL}|{DITTO})*{QUOTE}	 	{	write_char(); 		}
+0{OCT}+ 																						{ 	write_oct();		}
+0[Xx]{HEX}+																						{ 	write_hex();		}
+{DIGIT}+																						{	write_int();		}
+{DIGIT}*\.{DIGIT}*{EXP}?																		{	write_fp();			}
+{ALPHA}({ALPHA}|{DIGIT})*																		{ 	write_id();			}
+"{"																								{	write_begin();		}
+"}"																								{	write_end();		}
+"("																								{ 	write_open();		}
+")"																								{ 	write_close();		}
+"["																								{ 	write_bopen();		}
+"]"																								{ 	write_bclose();		}
+";"																								{	write_sep();		}
+"/*"(.|\n)*"*/"																					{	write_comment();	}
+"//".*																							{	write_inline(); 	}
+^"#".*																							{	write_directive();	}
+[ \t\v\n\r\f]+																					{ 	write_formatting();	}
+{OPWEQ}[=]?|"++"|"--"|"||"|"&&"|"~"|","|"?"|":"|"."|"->"|","									{ 	write_op();			}
+.																								{ 	fprintf(stderr, "Error: <%s>\n", yytext);	}
 
 %%
 
@@ -108,13 +110,11 @@ void yyFlexLexer::init_table()
 	"switch", "typedef", "union",
 	"unsigned",	"void",	"volatile",
 	"while"	};
-
 	for (size_t i = 0; i < 32; i++)
 	{
 		symbol_table[keywords[i]] = KEYWORD;
 	}
 }
-
 
 void yyFlexLexer::write_formatting()
 {
@@ -126,8 +126,6 @@ void yyFlexLexer::write_formatting()
 			break;
 	}
 }
-
-
 
 void yyFlexLexer::write_indent()
 {
@@ -165,7 +163,6 @@ void yyFlexLexer::write_sep()
 		putchar(' ');
 }
 
-
 void yyFlexLexer::write_char()
 {
 	printf("<span style=\"text-decoration: underline; color: black;\"><span style=\"color: brown\">");
@@ -173,6 +170,7 @@ void yyFlexLexer::write_char()
 	printf("</span></span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_string()
 {
 	printf("<span style=\"color: red;\">");
@@ -180,6 +178,7 @@ void yyFlexLexer::write_string()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_oct()
 {
 	printf("<span style=\"font: italic; color: brown;\">");
@@ -187,6 +186,7 @@ void yyFlexLexer::write_oct()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_hex()
 {
 	printf("<span style=\"font: italic; color: brown;\">");
@@ -194,6 +194,7 @@ void yyFlexLexer::write_hex()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_int()
 {
 	printf("<span style=\"color: brown;\">");
@@ -201,6 +202,7 @@ void yyFlexLexer::write_int()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_fp()
 {
 	printf("<span style=\"color: brown;\">");
@@ -243,7 +245,6 @@ void yyFlexLexer::write_id()
 		printf("</span></a>");
 		putchar(' ');
 	}
-
 }
 
 // begin {}-block
@@ -286,6 +287,7 @@ void yyFlexLexer::write_bopen()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_bclose()
 {
 	printf("<span style=\"color: black; font-weight: bold;\">");
@@ -293,12 +295,14 @@ void yyFlexLexer::write_bclose()
 	printf("</span>");
 	putchar(' ');
 }
+
 void yyFlexLexer::write_comment()
 {
 	printf("<span style=\"color: green;\">");
 	write_html();
 	printf("</span>");
 }
+
 void yyFlexLexer::write_inline()
 {
 	printf("<span style=\"color: green;\">");
