@@ -1,3 +1,4 @@
 *.o
 Compiler Construction/scanner-translation/myout
 Compiler Construction/scanner-translation/lextest
+Compiler Construction/scanner-translation/scanner-translation.tar
