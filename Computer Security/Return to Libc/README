@@ -1,0 +1,91 @@
+James Bach
+Project 2
+return to libc attack
+
+TASK 1: Exploiting the Vulnerability
+1: Please describe how you decide the values for X, Y and Z. Either show us your reasoning, or if you use trial-and-error approach, show your trials.
+
+The goal for the first step is to overwrite the eip to the address of the system libc call. 
+
+char buffer[12];
+/* The following statement has a buffer overflow problem */
+fread(buffer, sizeof(char), 40, badfile);
+===================================================================
+Here is a conceptual memory layout of the previous section:
+
+----------------
+badfile address pointer location
+----------------
+40 address
+----------------
+sizeof(char) address
+----------------
+buffer address
+----------------						
+return address <overwrite this with system> [24]
+----------------
+$ebp old frame pointer  		  [20]
+----------------
+4 byte value of 40                [16]
+4 byte value of sizeof(char)      [12]
+12 byte buffer					  [0]
+----------------                          
+
+Additionally when the libc function is called we want the return address to be exit and the parameters to be "/bin/sh" so the [28] is exit and [32] is the address of the environment variable that will return this string. These addresses have been located with testing the environment variable with 
+
+#include <stdio.h>
+
+int main(){
+	printf("%x\n", (unsigned int)getenv("MYSHELL"));
+	system(getenv("MYSHELL"));
+	return 0;
+}
+
+Additionally, gdb with:
+
+(gdb) b main
+Breakpoint 1 at 0x80484b6
+(gdb) r
+Starting program: /home/seed/proj2/retlib
+
+Breakpoint 1, 0x080484b6 in main ()
+(gdb) p system
+$1 = {<text variable, no debug info>} 0xb7e5f430 <system>
+(gdb) p exit
+$2 = {<text variable, no debug info>} 0xb7e52fb0 <exit>
+(gdb)
+
+
+For determining placement purposes, I used the following snippet to help understand some of what was getting positioned where in gdb.
+char testcode[] = "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2A";
+
+2. After your attack is successful, change the file name of retlib to a different name, making sure that the length of the file names are different. For example, you can change it to newretlib. Repeat the attack (without changing the content of badfile). Is your attack successful or not? If it does not succeed, explain why.
+
+The attack is not successful because of the fixed memory locations. By renaming the file to a different length, some of the memory locations hard coded into the exploited badfile become offset and incorrect such as the global variables involved. Unlike using a sled for flexibility, these memory address have to be perfect.
+
+TASK 2: Address Randomization
+
+1. Can you get a shell? If not, what is the problem? How does the address randomization make your return-to-libc attack difficult?
+
+$ su root
+Password: (enter root password)
+# /sbin/sysctl -w kernel.randomize_va_space=2
+
+Segmentation fault (core dumped)
+
+Using the above commands randomizes the memory locations of the program. The retlib program will just have segmentation faults because of the overflowed memory is now pointing to incorrect locations. These hardcoded values for the libc attack are no longer viable without other methods involved. These values will change continuously from one run to the next, providing a formidable defense.
+
+TASK 3: Stack Guard Protection
+
+1. Can you get a shell? If not, what is the problem? How does the Stack Guard protection make your return-to-libc attack difficult?
+
+$ su root
+Password (enter root password)
+# gcc -z noexecstack -o retlib retlib.c
+# chmod 4755 retlib
+# exit
+
+*** stack smashing detected ***: retlib terminated
+
+This stack guard prevents overflowing the return address. The shell cannot be executed here. This stack guard puts a random number canary before the return address on the stack. Overflowing will override this number and will be detected, causing the program to terminate. This is another defense of overflowing the values.
+
