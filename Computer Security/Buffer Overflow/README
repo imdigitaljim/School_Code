@@ -12,6 +12,8 @@ This will also result in setting the virtual address space randomization to 0 wi
 
 $echo 0 | sudo tee /proc/sys/kernel/randomize_va_space
 
+
+Task 1: Exploiting the Vulnerability
 The vulnerable program with source called "stack.c" is made using the flags -fno-stack-protector -z execstack which disable stack protection and makes the stack executable should it have code that can run. The vulnerability in this program is with the way strcpy is used. The vulnerable function "int bof(char *str)" has a 24byte buffer that is used as the destination of strcpy and a source buffer passed in as a parameter. In this case strcpy will read from the source until it encounters a null terminator from the expected cstring. This buffer is read in from a file called "badfile" of size 517bytes. 
 
 In the exploit program made with "exploit.c", I performed a few tests first using an easily identifiable pattern of length 250. This far exceeds the buffer meant for the cstring and with this pattern it will segmentation fault because this will overwrite the $eip register so that the address of the next instruction will be an invalid. Then when examining the stack I can identify an offset location where the stack $eip memory location should be.  Using gdb on the vuln program I can see what made it into the $eip where the instruction failed and caused the segmentation fault using "i r $eip." I can determine the offset using this information. The offset ends up being 36 bytes which can be determined with the 2 parameters that got pushed on the stack (8 bytes), the length of the buffer itself (24 bytes), and then the frame pointer of the function (4 bytes). The following 4 bytes (after the previous 36) are the $eip. That means that for the payload, we want the $eip to be hijacked so that we go to the next instruction being an address of the sled section or at least the beginning of the shellcode. The sled section contains nops, aka just blank instructions, and then sequentially will get to the shellcode. This allows for a large amount of memory address flexibility to set our shellcode somewhere in the sled and determining the address to hijack in the $eip. We can also investigate the stack for the memory location of our shellcode and sled in gdb using x\200xb.
@@ -29,4 +31,47 @@ $exploit
 $vuln
 
 The result will be shell accessibility.
+Then we can run a program to make sure it is real root with running:
+
+void main()
+{
+	setuid(0); system("/bin/sh");
+}
+
+
+Task 2: Address Randomization
+
+1. Can you get a shell? If not, what is the problem? How does the address randomization make your attacks difficult? If running the vulnerable code once does not get you the root shell, how about running it for many times?
+
+
+$ su root
+Password: (enter root password)
+# /sbin/sysctl -w kernel.randomize_va_space=2
+
+Segmentation fault (core dumped)
+
+No you dont get a shell. Using the above commands randomizes the memory locations of the program. The vuln program will just have segmentation faults because of the overflowed memory is now pointing to incorrect locations. These hardcoded values for the sled are no longer valid. These values will change continuously from one run to the next, providing a formidable defense.
+
+$ sh -c "while [ 1 ]; do ./stack; done;"
+Running the above command would effectively bruteforce try the program until it succeeds based entirely on address space layout randomization lining up.
+
+
+Task 3: Stack Guard
+
+# gcc -o stack -z execstack stack.c
+
+*** stack smashing detected ***
+
+This does not include the flag -fno-stack-protector. This default stack guard prevents overflowing the return address. The shell cannot be executed here. This stack guard puts a random number canary before the return address on the stack. Overflowing will override this number and will be detected, causing the program to terminate. This is another defense of overflowing the values.
+
+
+
+Task 4: Non-executable Stack
+
+1. Can you get a shell? If not, what is the problem? How does this protection scheme make your attacks difficult.
+
+# gcc -o stack -fno-stack-protector -z noexecstack stack.c
+
+You cannot get a shell. The stack that contains my shell code is non executable, which in other words keeps it from acting like code. This makes it impossible for shell code to be executed in this fashion and get a shell. 
+
 

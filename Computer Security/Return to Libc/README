@@ -41,6 +41,7 @@ int main(){
 	return 0;
 }
 
+
 Additionally, gdb with:
 
 (gdb) b main
@@ -59,6 +60,25 @@ $2 = {<text variable, no debug info>} 0xb7e52fb0 <exit>
 For determining placement purposes, I used the following snippet to help understand some of what was getting positioned where in gdb.
 char testcode[] = "Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2A";
 
+
+To run:
+if not already added: 
+
+$export MYSHELL=/bin/sh
+
+then
+$make
+$exploit
+$retlib
+
+The result will be user shell accessibility.
+Then we can run a program to make sure it is real root with running:
+
+void main()
+{
+	setuid(0); system("/bin/sh");
+}
+
 2. After your attack is successful, change the file name of retlib to a different name, making sure that the length of the file names are different. For example, you can change it to newretlib. Repeat the attack (without changing the content of badfile). Is your attack successful or not? If it does not succeed, explain why.
 
 The attack is not successful because of the fixed memory locations. By renaming the file to a different length, some of the memory locations hard coded into the exploited badfile become offset and incorrect such as the global variables involved. Unlike using a sled for flexibility, these memory address have to be perfect.
@@ -73,7 +93,7 @@ Password: (enter root password)
 
 Segmentation fault (core dumped)
 
-Using the above commands randomizes the memory locations of the program. The retlib program will just have segmentation faults because of the overflowed memory is now pointing to incorrect locations. These hardcoded values for the libc attack are no longer viable without other methods involved. These values will change continuously from one run to the next, providing a formidable defense.
+Using the above commands randomizes the memory locations of the program. The retlib program will just have segmentation faults because of the overflowed memory is now pointing to incorrect locations. These hardcoded values for the libc attack are no longer viable without other methods involved. These values will change continuously from one run to the next, providing a formidable defense. 
 
 TASK 3: Stack Guard Protection
 
