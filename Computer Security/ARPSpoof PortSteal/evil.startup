@@ -1,0 +1,10 @@
+echo "configuring eth0 interface"
+ip link set eth0 up
+ip link set address 00:00:00:00:00:ff dev eth0
+ip address add 10.0.0.232/24 dev eth0
+ip route add default via 10.0.0.1
+
+echo "installing scapy"
+dpkg -i /root/python-support_1.0.6_all.deb
+dpkg -i /root/python-scapy_2.0.1-1_all.deb
+

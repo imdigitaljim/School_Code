@@ -80,7 +80,7 @@ NONQDNL [^\n\'"]
 "["																								{ 	write_bopen();		}
 "]"																								{ 	write_bclose();		}
 ";"																								{	write_sep();		}
-"/*"(.|\n)*"*/"																					{	write_comment();	}
+\/\*.*?\*\/																						{	write_comment();	}
 "//".*																							{	write_inline(); 	}
 ^"#".*																							{	write_directive();	}
 [ \t\v\n\r\f]+																					{ 	write_formatting();	}

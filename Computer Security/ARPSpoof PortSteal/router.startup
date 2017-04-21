@@ -1,0 +1,11 @@
+ip link set eth1 up
+ip link set address 00:00:00:00:00:01 dev eth1
+ip address add 10.0.0.1/24 dev eth1
+
+/etc/init.d/dhcp3-server start
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -j MASQUERADE
+
+
